@@ -17,3 +17,14 @@ string = 'Hello'
 #Boolean
 boolean_value = False
 boolean_value = True
+
+#Using the Global Function/Accessing variables declared outside of functions
+integer = 1
+
+def modify():
+    integer = 2
+    
+def main():
+    print(integer)
+    
+main()
