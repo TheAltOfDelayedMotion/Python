@@ -127,7 +127,7 @@ def intoSeconds(input):
     
 def mainTest():
     tf = True
-    timertime = ["0H", "1M", "10S","3000MS"]
+    timertime = ["0H", "0M", "10S","3000MS"]
     startTimer(timertime)
     
     while tf:

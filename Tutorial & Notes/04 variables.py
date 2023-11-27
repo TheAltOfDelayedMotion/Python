@@ -22,9 +22,9 @@ boolean_value = True
 integer = 1
 
 def modify():
+    integer = 2 #This does not edit the variable "integer" that was declared outside of the function 
+    
+def modify2():
+    global integer #Declare the variable globally in the function to access it inside the function
     integer = 2
     
-def main():
-    print(integer)
-    
-main()
