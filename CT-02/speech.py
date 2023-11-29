@@ -17,7 +17,7 @@ def listen():
         print("[EXECUTE] Processing....")
         #speech = r.recognize_whisper(audio, language="english") #Whisper
         speech =  str(r.recognize_google(audio))
-        speech = speech.lower()
+        speech = speech.lower() #Lowercase for return data
         return speech 
     
     except sr.UnknownValueError:

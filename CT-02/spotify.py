@@ -1,4 +1,5 @@
 from time import sleep
+from numpy import number
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from torch import device
@@ -7,10 +8,12 @@ callsignlaptop1 = "laptop"
 callsignlaptop2 = "jaydens_laptop"
 callsigniPhone1 = "iphone"
 callsigniPhone2 = "phone"
-
+callsigntv1 = "tv"
+callsigntv2 = "samsung tv"
 
 actuallaptopname = "JAYDENS_LAPTOP"
 actualiPhonename = "iPhone"
+actualtvname = "TOBEADDED"
 
 scope = "user-read-playback-state,user-modify-playback-state"
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="80f245f716174488b68c8d33d081a863",
@@ -159,17 +162,18 @@ def pause():
     else:
         print("HUH??? Spotify module error btw")
     
-def play():
+def play(uri=None):
+    uri = [uri]
     if (getDeviceInfo() == "No Active Devices on Spotify..."):
         print("No Active Devices on Spotify...")
     
     elif (currentlyPlaying() == "Spotify is not currently playing anything...") and (getDeviceInfo() != "No Active Devices on Spotify..."):
-        sp.start_playback()
+        sp.start_playback(uris=uri)
         print("Spotify Playback Started...")
     
     elif (currentlyPlaying() != "Spotify is not currently playing anything...") and (getDeviceInfo() != "No Active Devices on Spotify..."):
         try:
-            sp.start_playback()
+            sp.start_playback(uris=uri)
             print("Spotify Playback Started...")
             
         except spotipy.exceptions.SpotifyException:
@@ -191,6 +195,44 @@ def switchDevice(device_name, force_play=True):
     else:
         print(device_id[1])
 
+def searchSpotifySongData(song_name, song_artist='None', numberofresults=1):
+    if song_artist == 'None':
+        songquery = song_name
+        
+    else:
+        songquery = f"{song_name}, {song_artist}"
+    
+    searchResults = []
+    returndata = {}
+    
+    for i in range(numberofresults):
+        rawdata = sp.search(songquery, limit=numberofresults, market='SG')
+        print(rawdata)
+        tracksraw = rawdata.get("tracks")
+        tracksdata = tracksraw.get("items")
+        songdata = tracksdata[0] #get first track
+        
+        songName = songdata.get("name")
+        songURI = songdata.get("uri")
+        songArtistData = songdata.get("artists")
+        songArtistData = songArtistData[0]
+        songArtist = songArtistData.get("name")
+        songAlbumData = songdata.get("album")
+        songAlbum = songAlbumData.get("name")
+    
+        returndata["name"] = songName
+        returndata["uri"] = songURI
+        returndata["artist"] = songArtist
+        returndata["album"] = songAlbum
+        #returndata = [songName, songURI, songArtist, songAlbum]
+        searchResults.append(returndata)
+            
+    if numberofresults == 1:
+        return returndata
+    
+    else:
+        return searchResults    
+
 def testFeatures():
     print(f"{currentlyPlaying()} \n")
     print(f"{getDeviceInfo()} \n")
@@ -205,5 +247,8 @@ def testFeatures():
     switchDevice("iphone")
     sleep(5)
     switchDevice("laptop")
-    
-testFeatures()
+
+songdata = searchSpotifySongData("Nothing", "George Benson")
+print(songdata.get("uri"))
+play(songdata.get("uri"))
+
