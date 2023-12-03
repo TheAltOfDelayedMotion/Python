@@ -1,5 +1,6 @@
+import queue
 from time import sleep
-from numpy import number
+from numpy import False_, number
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from torch import device
@@ -162,19 +163,29 @@ def pause():
     else:
         print("HUH??? Spotify module error btw")
     
-def play(uri=None):
-    uri = [uri]
+def play(song = None, song_artist = None, uridata=None):
+    if song!= None:
+        songdata = searchSpotifySongData(song, song_artist)
+        uridata = songdata.get("uri")
+    
+    uri = [uridata]
+    #if song was not found, uridata = None
+    
     if (getDeviceInfo() == "No Active Devices on Spotify..."):
         print("No Active Devices on Spotify...")
     
     elif (currentlyPlaying() == "Spotify is not currently playing anything...") and (getDeviceInfo() != "No Active Devices on Spotify..."):
         sp.start_playback(uris=uri)
         print("Spotify Playback Started...")
+        print(currentlyPlaying())
+        sleep(1)
     
     elif (currentlyPlaying() != "Spotify is not currently playing anything...") and (getDeviceInfo() != "No Active Devices on Spotify..."):
         try:
             sp.start_playback(uris=uri)
             print("Spotify Playback Started...")
+            sleep(1)
+            print(currentlyPlaying())
             
         except spotipy.exceptions.SpotifyException:
             print("Spotify is already playing!")
@@ -195,8 +206,13 @@ def switchDevice(device_name, force_play=True):
     else:
         print(device_id[1])
 
-def searchSpotifySongData(song_name, song_artist='None', numberofresults=1):
-    if song_artist == 'None':
+def searchSpotifySongData(song_name, song_artist=None, numberofresults=1):
+    cont = True
+    if song_name == "":
+        print("No song search query!")
+        cont = False
+    
+    if song_artist == None:
         songquery = song_name
         
     else:
@@ -205,33 +221,43 @@ def searchSpotifySongData(song_name, song_artist='None', numberofresults=1):
     searchResults = []
     returndata = {}
     
-    for i in range(numberofresults):
-        rawdata = sp.search(songquery, limit=numberofresults, market='SG')
-        print(rawdata)
-        tracksraw = rawdata.get("tracks")
-        tracksdata = tracksraw.get("items")
-        songdata = tracksdata[0] #get first track
-        
-        songName = songdata.get("name")
-        songURI = songdata.get("uri")
-        songArtistData = songdata.get("artists")
-        songArtistData = songArtistData[0]
-        songArtist = songArtistData.get("name")
-        songAlbumData = songdata.get("album")
-        songAlbum = songAlbumData.get("name")
-    
-        returndata["name"] = songName
-        returndata["uri"] = songURI
-        returndata["artist"] = songArtist
-        returndata["album"] = songAlbum
-        #returndata = [songName, songURI, songArtist, songAlbum]
-        searchResults.append(returndata)
+    if cont:
+        for i in range(numberofresults):
+            rawdata = sp.search(songquery, limit=numberofresults, market='SG')
+            #print(rawdata)
+            tracksraw = rawdata.get("tracks")
+            tracksdata = tracksraw.get("items")
             
-    if numberofresults == 1:
-        return returndata
-    
+            try:
+                songdata = tracksdata[0] #get first track
+                
+            except IndexError:
+                print(f'Song "{songquery}" was not found!')
+                break
+            
+            songName = songdata.get("name")
+            songURI = songdata.get("uri")
+            songArtistData = songdata.get("artists")
+            songArtistData = songArtistData[0]
+            songArtist = songArtistData.get("name")
+            songAlbumData = songdata.get("album")
+            songAlbum = songAlbumData.get("name")
+        
+            returndata["name"] = songName
+            returndata["uri"] = songURI
+            returndata["artist"] = songArtist
+            returndata["album"] = songAlbum
+            #returndata = [songName, songURI, songArtist, songAlbum]
+            searchResults.append(returndata)
+                
+        if numberofresults == 1:
+            return returndata #{'name': "Don't Know Why", 'uri': 'spotify:track:1zNXF2svmdlNxfS5XeNUgr', 'artist': 'Norah Jones', 'album': 'Come Away With Me (Super Deluxe Edition)'}
+        
+        else:
+            return searchResults    
+        
     else:
-        return searchResults    
+        return {}
 
 def testFeatures():
     print(f"{currentlyPlaying()} \n")
@@ -248,7 +274,52 @@ def testFeatures():
     sleep(5)
     switchDevice("laptop")
 
-songdata = searchSpotifySongData("Nothing", "George Benson")
-print(songdata.get("uri"))
-play(songdata.get("uri"))
+def addtoQueue(song, song_artist = None):
+    songdata = searchSpotifySongData(song, song_artist)
+    song_name = songdata.get("name")
+    song_artist = songdata.get("artist")
+    
+    if songdata.get("uri") != None:
+        try:
+            sp.add_to_queue(songdata.get("uri"))
+            print(f'Adding {song_name} [{song_artist}] to the queue!')
+            
+        except spotipy.exceptions.SpotifyException:
+            print("No Active Devices on Spotify...")
+            
+    else:
+        if songdata != {}:
+            print(f'Unable to add "{song}" to the queue...')
 
+def skip():
+    try:
+        sp.next_track()
+        print(f"Skipping: {currentlyPlaying(justReturnSongInfo=True)}")
+        
+        sleep(1)
+        print(f"Playing: {currentlyPlaying(justReturnSongInfo=True)}")
+        
+    except spotipy.exceptions.SpotifyException:
+        print("No Active Devices on Spotify...")
+
+def rewind():
+    try:
+        sp.previous_track()
+        sleep(1)
+        print(f"Rewinding to: {currentlyPlaying(justReturnSongInfo=True)}")
+        
+    except spotipy.exceptions.SpotifyException:
+        print("No Active Devices on Spotify...")
+
+def getPlaylist():
+    data = sp.current_user_playlists(limit=50, offset=0)
+    playlists = data.get("items") #items in return
+    #print(playlists)
+    
+    for playlist in playlists:
+        print(playlist.get("name"))
+        print(playlist.get("id"))
+
+
+
+getPlaylist()
