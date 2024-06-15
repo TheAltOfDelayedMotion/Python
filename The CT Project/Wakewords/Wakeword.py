@@ -1,11 +1,13 @@
+# REFERENCE FILE
+# This file is not used as a module for CT-02. 
+# Wakeword detection is already integrated into main.py
+
 import pvporcupine
 from pvrecorder import PvRecorder
 
-
-
 def main():
-    keyword_dictionary = {"1": ["Hey CT", r'C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\Hey-Cee-Tee_en_windows_v3_0_0.ppn'], 
-                   "2": ["Yo CT", r'C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\yo-cee-tee_en_windows_v3_0_0.ppn']}
+    keyword_dictionary = {"1": ["Hey CT", r'C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\Datafiles\Hey-Cee-Tee_en_windows_v3_0_0.ppn'], 
+                   "2": ["Yo CT", r'C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\Datafiles\yo-cee-tee_en_windows_v3_0_0.ppn']}
     access_key = '5XYibmnYr83z6EscaHDRMx7ERgAnRBf1T71w007c+xADuXcb3PhsOg=='
     keyword_paths = []
     

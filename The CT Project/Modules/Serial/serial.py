@@ -1,3 +1,7 @@
+# REFERENCE FILE
+# This file is not used as a module for CT-02. 
+# It is already integrated in main.py. 
+
 #Modules
 import serial 
 import time

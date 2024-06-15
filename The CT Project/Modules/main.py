@@ -4,11 +4,15 @@ import serial
 import time
 import threading as th
 import turtle
+from speechtotextnew import recognizer as SST
 
 arduino = serial.Serial(port='COM6', baudrate=9600, timeout=.1)
 
 #Variables
 state = "sleep"
+speech = None
+WAKEWORDPATH1 = r'C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\Datafiles\Hey-Cee-Tee_en_windows_v3_0_0.ppn'
+WAKEWORDPATH2 = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\Datafiles\yo-cee-tee_en_windows_v3_0_0.ppn"
 
 #Serial
 class Serial:
@@ -49,23 +53,29 @@ class Serial:
             
     def deepSleepInput():
         global state
+        writeinput = turtle.Screen()
+        writeinput.setup(400, 500)
+        
         while True:
-            writeinput = turtle.Screen()
-            writeinput.setup(400, 500)
-            
             datawrite = turtle.textinput("Python -> C++ Input", "Dataline")
-            print("[PYTHON] Turtle Window awaiting input... ")
+            print(f"[PYTHON] Command Recieved: {datawrite}")
             
             if datawrite == "wake":
                 state = "sleep"
+                print(f"[PYTHON] Starting Up CT-02...")
+                Serial.write("00/sleep")
+                
+                writeinput.clear()
+                writeinput.reset()
+                writeinput.bye()
                 break
                 
             elif datawrite != "":
                 Serial.write(datawrite)
 
 def wakeword():
-    keyword_dictionary = {"1": ["Hey CT", r'C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\Hey-Cee-Tee_en_windows_v3_0_0.ppn'], 
-                   "2": ["Yo CT", r'C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\yo-cee-tee_en_windows_v3_0_0.ppn']}
+    keyword_dictionary = {"1": ["Hey CT", WAKEWORDPATH1], 
+                   "2": ["Yo CT", WAKEWORDPATH2]}
     access_key = '5XYibmnYr83z6EscaHDRMx7ERgAnRBf1T71w007c+xADuXcb3PhsOg=='
     keyword_paths = []
     
@@ -112,11 +122,13 @@ def wakeword():
 
 def sleep():
     global state
+    
     #print(f"[PYDEBUG] EVENT {wakeEvent.is_set()}")
     if wakeEvent.is_set() == True:
         print("[EVENT] wakeEvent Detected")
         Serial.write("00/idle")
         wakeEvent.clear()
+        SST.stopRecording.clear()
         state = "idle"
         
 def deepsleep():
@@ -124,8 +136,9 @@ def deepsleep():
     getInput_Thread = th.Thread(target=Serial.deepSleepInput) #special input prompt such that if wake is passed, robot goes into sleep
     getInput_Thread.daemon = True
     
-    if getInput_Thread.is_alive(): #so that it doesnt keep starting this thread over and over again until the program closes (leaves deep sleep)
-        getInput_Thread.start()
+    if getInput_Thread.is_alive() == False and state == "deepsleep": #so that it doesnt keep starting this thread over and over again until the program closes (leaves deep sleep)
+        print("[PYTHON] Deep Sleep threading started")
+        getInput_Thread.run()
 
 #Threading
 serialUpdate_thread = th.Thread(target=Serial.serialUpdate)
@@ -138,20 +151,31 @@ serialUpdate_thread.start()
 wakeEvent = th.Event() #if wakeword is called... 
 
 def main():
+    global speech
     #Clearing of the wakeword event if state is not sleep (change if needed later)
     if wakeEvent.isSet() == True and state != "sleep":
         wakeEvent.clear()
     
     if state == "idle":
-        #print("IDLE")
-        pass
+        SST.stopRecording.clear()
+        #print("[SST] RECOGNIZE")
+        speech = SST.recognize()
+        if speech != None:
+            print(f"[PYSST] {speech}")
+            SST.stopRecording.clear()
     
     elif state == "sleep":
         #print("SLEEP")
         sleep()
         
     elif state == "deepsleep":
+        speech = None
         deepsleep()
     
 while __name__ == "__main__":
-    main()
+    try:
+        main()
+    
+    except KeyboardInterrupt:
+        Serial.write("00/deepsleep")
+        state = "deepsleep"
