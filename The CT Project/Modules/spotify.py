@@ -1,9 +1,6 @@
-import queue
 from time import sleep
-from numpy import False_, number
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from torch import device
 
 callsignlaptop1 = "laptop"
 callsignlaptop2 = "jaydens_laptop"
@@ -20,7 +17,9 @@ scope = "user-read-playback-state,user-modify-playback-state"
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="80f245f716174488b68c8d33d081a863",
                                                client_secret="6eaa228cb71b4a5dad8353dc3d7e271d",
                                                redirect_uri="http://localhost:1234",
-                                               scope=scope))
+                                               scope=scope,open_browser=True))
+
+spotipy.util.prompt_for_user_token()
 
 def currentlyPlaying(justReturnSongInfo = False):
     data = sp.current_playback(market="US", additional_types=None)
@@ -320,6 +319,3 @@ def getPlaylist():
         print(playlist.get("name"))
         print(playlist.get("id"))
 
-
-
-getPlaylist()
