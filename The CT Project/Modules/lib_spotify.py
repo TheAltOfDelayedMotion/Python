@@ -1,3 +1,5 @@
+#For extra info, the login information is stalled in .cache, delete .cache to reload the auth
+
 from time import sleep
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
@@ -17,9 +19,7 @@ scope = "user-read-playback-state,user-modify-playback-state"
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="80f245f716174488b68c8d33d081a863",
                                                client_secret="6eaa228cb71b4a5dad8353dc3d7e271d",
                                                redirect_uri="http://localhost:1234",
-                                               scope=scope,open_browser=True))
-
-spotipy.util.prompt_for_user_token()
+                                               scope=scope,open_browser=True)) 
 
 def currentlyPlaying(justReturnSongInfo = False):
     data = sp.current_playback(market="US", additional_types=None)
@@ -36,11 +36,11 @@ def currentlyPlaying(justReturnSongInfo = False):
         active_device = getDeviceInfo()
         
         songOnlyPlaybackInfo = f"{currentsong} [{songartists}]"
-        playbackInfo = f"Currently playing on {active_device}: {currentsong} [{songartists}]"
+        playbackInfo = f"[SPOTIPY] Currently playing on {active_device}: {currentsong} [{songartists}]"
         #print(playbackInfo)
         
     else:
-        playbackInfo = "Spotify is not currently playing anything..."
+        playbackInfo = "[SPOTIPY] Spotify is not currently playing anything..."
         #print("Spotify is not currently playing anything...")
     
     if justReturnSongInfo == True:
@@ -98,7 +98,7 @@ def getDeviceID(device_name, returnaslist = False):
         #print("Error, Device not found!")
         returndata = ["none", "Device is not active!"]
         return returndata
-        
+
 def getDeviceInfo(returnalldeviceids = False):
     spotifydeviceinfo = [0]
     activeDevices = ""
@@ -167,30 +167,32 @@ def play(song = None, song_artist = None, uridata=None):
         songdata = searchSpotifySongData(song, song_artist)
         uridata = songdata.get("uri")
     
+    # else: 
+    #     songdata = searchSpotifySongData(currentlyPlaying(True))
+    #     uridata = songdata.get("uri")
+    
     uri = [uridata]
     #if song was not found, uridata = None
+    
     
     if (getDeviceInfo() == "No Active Devices on Spotify..."):
         print("No Active Devices on Spotify...")
     
-    elif (currentlyPlaying() == "Spotify is not currently playing anything...") and (getDeviceInfo() != "No Active Devices on Spotify..."):
+    elif (song != None):
         sp.start_playback(uris=uri)
         print("Spotify Playback Started...")
         print(currentlyPlaying())
         sleep(1)
     
-    elif (currentlyPlaying() != "Spotify is not currently playing anything...") and (getDeviceInfo() != "No Active Devices on Spotify..."):
+    else:
         try:
-            sp.start_playback(uris=uri)
+            sp.start_playback()
             print("Spotify Playback Started...")
             sleep(1)
             print(currentlyPlaying())
             
         except spotipy.exceptions.SpotifyException:
-            print("Spotify is already playing!")
-            
-    else:
-        print("broooo something wrong with spotify module")
+            print("Spotify Broke... ")
 
 def switchDevice(device_name, force_play=True):
     device_id = []
@@ -265,7 +267,7 @@ def testFeatures():
     sleep(2)
     pause()
     sleep(2)
-    play()
+    play("Crossroads by slash")
     sleep(2)
     switchDevice("laptop")
     sleep(5)
@@ -318,4 +320,3 @@ def getPlaylist():
     for playlist in playlists:
         print(playlist.get("name"))
         print(playlist.get("id"))
-

@@ -1,3 +1,6 @@
+# Speech Recognition Module for CT-02 
+# #-please please please concat the segments.texts together thanks
+
 from faster_whisper import WhisperModel
 import numpy as np
 import sounddevice as sd
@@ -14,7 +17,7 @@ timeoutms = 1500 #THIS IS FOR TIMEOUT AFTER TEXT DETECTED
 waitforspeechtimeout = 12000 #THIS IS FOR TIMEOUT IF SPEECH IS NOT DETECTED
 waitforstreamload = 500 #some buffer time to load the stream
 AUDIO_BOOST = 23 #boosting cus my computer mic is too soft
-SPEECH_DETECTION_LEVEL = 8 #Well the original level i set it at was 10 uh it works in mysterious ways
+SPEECH_DETECTION_LEVEL = 65 #very dependent on the mic that you are using
 
 #PYAUDIO & OTHER SETTINGS
 audiosavepath = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Speech Recognition\temp"
@@ -22,6 +25,7 @@ FRAMES_PER_BUFFER = 3200
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 16000
+MICDEVICE = 1
 
 #Storage Variables
 audiodata = []
@@ -38,6 +42,7 @@ waitTimeout = th.Event() #waiting for speech
 #Code
 def getMillis(): #Returns Millis 
     read = int(t()*1000)
+    
     return read
 
 def audio_callback(indata, frames, time, status): #This is the function for detecting timeout
@@ -82,26 +87,32 @@ class recognizer:
             channels=CHANNELS,
             rate=RATE,
             input=True,
-            frames_per_buffer=FRAMES_PER_BUFFER
+            frames_per_buffer=FRAMES_PER_BUFFER,
+            input_device_index=MICDEVICE
         )
 
         stream = sd.InputStream(callback=audio_callback)
-
+        #print(sd.query_devices())
+        
         initialMillis = getMillis()
         # speechTimeout = th.Event() #after speech waiting for more
         # waitTimeout = th.Event() #waiting for speech
 
         stream.start()
+    
+        #initialMillis = getMillis()
+        initialMillis = int(getMillis())
         
-        initialMillis = getMillis()
-        while (getMillis() - initialMillis) < waitforstreamload:
-            pass
+        # while (getMillis() - initialMillis) < waitforstreamload:
+        #     print(initialMillis)
+            
         
-        print("[VOICE] Stream Started")
+        #print("[VOICE] Stream Started")
         
         while True:
             if audioWrite == True:
                 audiodata.append(pstream.read(FRAMES_PER_BUFFER))
+                #print('asda')
                 
             elif speechTimeout.is_set(): 
                 path = audiosavepath + "\\" + f"detectedspeech.wav" #in voice extraction tests we want to save them as different files for testing, but now we just want to find exactly when we spoke
@@ -142,4 +153,3 @@ class recognizer:
         
         except UnboundLocalError:
             return None
-        

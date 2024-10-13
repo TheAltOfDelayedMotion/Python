@@ -15,7 +15,7 @@ def audio_callback(indata, frames, time, status):
     global initialMillis
     volume_norm = np.linalg.norm(indata) * 100
     
-    if volume_norm > 10: #speech detected
+    if volume_norm > 65: #speech detected
         initialMillis = getMillis()
         print(volume_norm)
     
@@ -24,7 +24,7 @@ def audio_callback(indata, frames, time, status):
         initialMillis = getMillis() #reset back
         
 duration = 5 #in seconds
-stream = sd.InputStream(callback=audio_callback)
+stream = sd.InputStream(callback=audio_callback, device=1)
 stream.start()
 
 while True:

@@ -1,20 +1,21 @@
-'''
-Usage notes for Timer
+# Usage notes for Timer
 
-startTimer()
-Arguements:
-1. <time> (List) 
-["10H", "20M", "0S", "2000MS"]
-["30S"]
-["20M"]
-["3500MS"] Milliseconds
-["1H", "30S"]
+# startTimer()
+# Arguements:
+# 1. <time> (List) 
+# ["10H", "20M", "0S", "2000MS"]
+# ["30S"]
+# ["20M"]
+# ["3500MS"] Milliseconds
+# ["1H", "30S"]
 
-checkTimerStatus()
-No Arguements!
-bool = checkTimerStatus()
-if the timer is finished, bool = True, else, False.
-'''
+# checkTimerStatus()
+# No Arguements!
+# bool = checkTimerStatus()
+# if the timer is finished, bool = True, else, False.
+
+#This is a really old version, i plan to change it by using threading events and the Millis library, its simply more accurate, rather than starting a whole damn thing
+
 import threading as th
 logfilePATH = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\CT-02\timerlog.txt"
 

@@ -8,7 +8,7 @@ import time
 import threading as th
 import turtle
 
-arduino = serial.Serial(port='COM6', baudrate=9600, timeout=.1)
+arduino = serial.Serial(port='COM5', baudrate=9600, timeout=.1)
 
 def serialUpdate():
     recieved = arduino.readline().decode("utf-8")
@@ -28,14 +28,28 @@ def getInput():
             write(datawrite)   
             
         print("Done")     
+    
+def getInputQuit():
+    while True:
+        writeinput = turtle.Screen()
+        writeinput.setup(400, 500)
+        print("Getting Input")
+        datawrite = turtle.textinput("Python -> C++ Input", "Dataline")
+        print(datawrite)
+        if datawrite != "":
+            write(datawrite)   
+            break
+            
+    return datawrite
 
 def write(x):
-    arduino.write(bytes(x, 'utf-8'))
+    arduino.write(bytes((x+'\n'), 'utf-8'))
     time.sleep(0.05)
 
-getInput_Thread = th.Thread(target=getInput)
-getInput_Thread.daemon = True
-getInput_Thread.start()
+
+# getInput_Thread = th.Thread(target=getInput)
+# getInput_Thread.daemon = True
+# getInput_Thread.start()
 while __name__ == "__main__":
     serialUpdate()
     

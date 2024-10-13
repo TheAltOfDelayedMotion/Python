@@ -14,7 +14,7 @@ timeoutms = 1500 #THIS IS FOR TIMEOUT AFTER TEXT DETECTED
 waitforspeechtimeout = 5000 #THIS IS FOR TIMEOUT IF SPEECH IS NOT DETECTED
 waitforstreamload = 500 #some buffer time to load the stream
 AUDIO_BOOST = 23 #boosting cus my computer mic is too soft
-SPEECH_DETECTION_LEVEL = 8 #Well the original level i set it at was 10 uh it works in mysterious ways
+SPEECH_DETECTION_LEVEL = 65 #Well the original level i set it at was 10 uh it works in mysterious ways
 
 #PYAUDIO & OTHER SETTINGS
 audiosavepath = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Speech Recognition\temp"

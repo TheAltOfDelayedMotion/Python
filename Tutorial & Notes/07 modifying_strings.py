@@ -21,3 +21,5 @@ boolean = ('profile' in string) #True
 
 string.split(" ") #Splits the string at every " "
 #output ["Identifying", "my", "profile"]
+
+# print(string.find("asdas")) if letter not found returns -1

@@ -1,17 +1,16 @@
 print("[PYTHON] CT-02 Starting... \n")
-
 import cv2
 import time
 import dlib
 import sys
 import turtle
-import serial #custom serial library is not needed (see class: serial)
+import serial 
 import pygame
+import spotify
 import pvporcupine
 import threading as th
-import lib_spotify as spotify
 from pvrecorder import PvRecorder
-from lib_stt import recognizer as SST
+from speechtotext import recognizer as SST
 arduino = serial.Serial(port='COM5', baudrate=9600, timeout=.1)
 
 #Variables
@@ -19,7 +18,6 @@ state = "sleep"
 speech = None
 WAKEWORDPATH1 = r'C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\Datafiles\Hey-Cee-Tee_en_windows_v3_0_0.ppn'
 WAKEWORDPATH2 = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Wakewords\Datafiles\yo-cee-tee_en_windows_v3_0_0.ppn"
-MIC_ID = 1
 
 #Face Tracking
 WIDTH = 1280
@@ -28,7 +26,12 @@ VISION_Y = 480
 truecentre = WIDTH/2
 vision_offset = 30
 movement_pix_sens = 32
+#Resize is 1280, 384
+#Boundaries
+#270 - 370
+#190 - 290
 detector = dlib.get_frontal_face_detector()
+#detector = cv2.CascadeClassifier("haarcascades/haarcascade_frontalface_alt.xml")
 
 #Serial
 class Serial:
@@ -90,7 +93,6 @@ class Serial:
             elif datawrite != "":
                 Serial.write(datawrite)
 
-#Functions
 def wakeword():
     keyword_dictionary = {"1": ["Hey CT", WAKEWORDPATH1], 
                    "2": ["Yo CT", WAKEWORDPATH2]}
@@ -112,7 +114,9 @@ def wakeword():
         sensitivities=[0.5, 0.5])
 
     #recording audio
-    recorder = PvRecorder(frame_length=porcupine.frame_length, device_index=MIC_ID)
+    recorder = PvRecorder(
+        frame_length=porcupine.frame_length,
+        device_index=-1)
     recorder.start()
     print('[AUDIO] Command Armed... ')
 
@@ -122,8 +126,11 @@ def wakeword():
             result = porcupine.process(pcm)
             
             if result >= 0:
-                print(f'[PYTHON] Detected Keyword: {keyword_dictionary[str(result+1)][0]}')
+                print(f'[WAKE] Detected Keyword: {keyword_dictionary[str(result+1)][0]}')
+
                 wakeEvent.set()
+                #print("[EVENT] wakeEvent True")
+                #print(f"[PYDEBUG] EVENT {wakeEvent.is_set()}")
                 
     except KeyboardInterrupt:
         print('[STATE] Forcing Deep Sleep...')
@@ -137,7 +144,7 @@ def sleep():
     global state
     #print(f"[PYDEBUG] EVENT {wakeEvent.is_set()}")
     if wakeEvent.is_set() == True:
-        #print("[EVENT] wakeEvent Detected")
+        print("[EVENT] wakeEvent Detected")
         Serial.write("00/awake")
         wakeEvent.clear()
         SST.stopRecording.clear()
@@ -152,48 +159,16 @@ def deepsleep():
         print("[PYTHON] Deep Sleep threading started")
         getInput_Thread.run()
 
-def listen():
-    global speech
-    print("[PYSST] Listening")
-    SST.stopRecording.clear()
-    speech_detected.clear()
-    speech = SST.recognize()
-    
-    if speech != None:
-        #print(f"[PYSST] {speech}")
-        SST.stopRecording.clear()
-        speech = speech.lower()
-        speech_detected.set() 
-        #to do: need to clear speech as a global variable and also clear Speech detected
-    
-    # else: #I genuinely don't know why i keep repeating it
-    #     SST.stopRecording.clear()
-
-def textToAction():
-    global speech
-    if speech != None:
-        #print(f"[PYSST] {speech}")
-        if speech.find("play") >= 0:
-            spotify.play()
-        
-        elif speech.find("pause") >= 0:
-            spotify.pause()
-        
-        speech = None
-
 #Threading
 serialUpdate_thread = th.Thread(target=Serial.serialUpdate)
-serialUpdate_thread.daemon = True #when error surfaces or program exits serial stops updating
 serialUpdate_thread.start()
 
-wakeword_thread = th.Thread(target=wakeword)
-wakeword_thread.daemon = True
-wakeword_thread.start()
+serialUpdate_thread = th.Thread(target=wakeword)
+serialUpdate_thread.daemon = True
+serialUpdate_thread.start()
+
 wakeEvent = th.Event() #if wakeword is called... 
 
-speech_detected = th.Event()
-
-#Main
 def main():
     global speech
     global state
@@ -219,8 +194,6 @@ def main():
             
             elif speech.find("pause") >= 0:
                 spotify.pause()
-        else:
-            SST.stopRecording.clear()
     
     if state == "awake":
         count = 0
@@ -234,32 +207,18 @@ def main():
         vid.set(cv2.CAP_PROP_FRAME_WIDTH, WIDTH)
         vid.set(cv2.CAP_PROP_FRAME_HEIGHT, HEIGHT)
         
-        #start recording (one thread)
-        listening_thread = th.Thread(target=listen)
-        listening_thread.daemon = True
-        listening_thread.start()
-        
-        while state == "awake": #while loop for repeat
-            #see if listening thread had detected speech
-            if speech_detected.is_set() == True:
-                speech_detected.clear()
-                
-                textToAction_thread = th.Thread(target=textToAction)
-                textToAction_thread.daemon = True
-                textToAction_thread.start()
-                
-            elif (listening_thread.is_alive() == False) and (speech_detected.is_set()) == False:
-                listening_thread = th.Thread(target=listen)
-                listening_thread.daemon = True
-                listening_thread.start()
-            
+        while state == "awake":
+            #Serial.serialUpdate()
             ret, frame = vid.read()
             if not ret:
                 break
             
             frame = frame[int((HEIGHT/2)-(VISION_Y/2)):int((HEIGHT/2)+(VISION_Y/2)), 0:WIDTH] #FULL WIDTH, HALF HEIGHT
             faces = detector(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+            
+            # Loop through list (if empty this will be skipped) and overlay green bboxes
             cv2.circle(frame, (int(WIDTH/2), int(VISION_Y/2)), 20, (0,0,0), 3)
+            
             
             for face in faces:
                 count += 1
@@ -277,9 +236,12 @@ def main():
                 
                 face_x = round(centrex)
                 face_y = round(centrey)
-        
+                
+                
             new_frame_time = time.time() 
-            fps = 1/(new_frame_time-prev_frame_time)     
+            
+            fps = 1/(new_frame_time-prev_frame_time) 
+            
             if (new_frame_time-prev_frame_time) >= 0.1:
                 prev_frame_time = new_frame_time 
                 fps = int(fps) 
@@ -317,7 +279,7 @@ def main():
         deepsleep()
 
 pygame.init()
-display = pygame.display.set_mode((300, 300))
+#display = pygame.display.set_mode((300, 300))
 
 print("\n[PYTHON] CT-02 Online")
 while __name__ == "__main__":
