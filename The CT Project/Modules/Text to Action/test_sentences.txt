@@ -1,0 +1,300 @@
+Can you pause my music?
+Could you play my playlist called "Chill Vibes"?
+What song is currently playing?
+Could you skip to the next track?
+Please rewind the song by 30 seconds.
+Can you add this song to my queue?
+Could you search for the song "Imagine" and play it?
+What’s the name of this song?
+Please shuffle my playlist.
+Could you repeat this track?
+Can you start my "Focus" playlist?
+Could you lower the volume?
+Could you increase the volume a little?
+Can you stop the music?
+Could you remove this song from the queue?
+Please play my most recent playlist.
+Could you look for new songs from my favorite artist?
+Can you like this song on Spotify?
+Could you add this song to my "Workout" playlist?
+Please turn off the music.
+Could you set an alarm for 6:00 AM tomorrow?
+Can you wake me up at 8:00 AM on Saturday?
+Could you remind me to call Mom at 3:00 PM?
+Please set an alarm called "Meeting" for 9:00 AM.
+Can you set a 15-minute timer for me?
+Could you name the alarm "Exercise" at 7:00 AM?
+Please tell me which alarms are active right now.
+Could you cancel all my active alarms?
+Can you snooze the alarm for 10 minutes?
+Could you reset all the timers?
+Please set a 10-second timer.
+Can you create a countdown for 30 minutes?
+Could you let me know when the timer goes off?
+Please stop all active alarms.
+Can you pause the timer for 5 minutes?
+Could you show me the list of my active timers?
+What time will the timer go off?
+Can you start a new timer for 45 minutes?
+Could you set a timer for 1 hour and 15 minutes?
+Please tell me how much time is left on the timer.
+Can you start recording a video log?
+Could you stop the current recording?
+Please show me my recent video logs.
+Could you record for 5 minutes?
+Can you open my log from yesterday?
+Could you display the transcript of my last recording?
+Please start a 30-second video log.
+Could you delete the last video recording?
+Can you archive the log from last week?
+Could you show me the oldest log I have?
+Please display the video transcript from yesterday.
+Could you organize my video logs by date?
+Can you show me all my video logs?
+Could you label my latest recording as "Meeting Notes"?
+Can you play back my last recording?
+Could you edit the title of the log from two days ago?
+Please show me the video log labeled "Project Update."
+Can you delete all my recordings older than a month?
+Could you record a 1-minute video log?
+Can you turn on the fan?
+Could you switch off the lights?
+Please turn on the air conditioning.
+Could you close the windows?
+Can you open the windows slightly?
+Could you turn off the air conditioning?
+Please set the lights to 50%.
+Can you adjust the fan speed to medium?
+Could you turn off all the lights in my room?
+Please open the windows fully.
+Can you set the air conditioning to 24°C?
+Could you dim the lights?
+Can you switch the lights to a warm tone?
+Could you turn off all appliances?
+Please increase the brightness of the lights.
+Could you activate sleep mode in my room?
+Can you switch off the fan and air conditioning?
+Could you lower the temperature in the room by 2 degrees?
+Please turn on all the lights.
+Could you increase the fan speed to high?
+Can you search Google for "best sushi restaurants near me"?
+Could you calculate 256 divided by 8?
+Please look up the population of Tokyo.
+Can you tell me the height of the Eiffel Tower?
+Could you calculate the square root of 144?
+Please search for "latest tech news."
+Could you do a Google search for "top movies of 2024"?
+Can you calculate 15% of 450?
+Could you tell me what 12 times 8 equals?
+Please find out how long the Great Wall of China is.
+Can you tell me the capital of Canada?
+Could you search for nearby parks?
+Can you check Google for the latest weather?
+Could you calculate 5 factorial?
+Please look up the release date for the new iPhone.
+Can you tell me the square root of 81?
+Could you calculate 20% of 300?
+Please search for the definition of "quantum mechanics."
+Could you look up "best books of 2023"?
+Can you calculate 7 squared?
+Could you check the date of the next solar eclipse?
+Play my Spotify playlist.
+Pause the music.
+Skip this song.
+Rewind the song by 30 seconds.
+Add this song to my queue.
+Search for "Imagine" in my Spotify playlists.
+Find out what song is currently playing.
+Turn the volume down.
+Turn the volume up.
+Shuffle the playlist.
+Repeat this song.
+Stop playing music.
+Start my "Morning Workout" playlist.
+Remove this song from the queue.
+Switch to my "Focus" playlist.
+Like this song.
+Add this track to my "Favorites" playlist.
+Play the next song.
+Turn off the music.
+Set an alarm for 6:30 AM.
+Set a 10-minute timer.
+Start a countdown for 30 minutes.
+Name the alarm "Work Reminder."
+Set a timer for 45 seconds.
+Start an alarm for 7:00 AM tomorrow.
+Snooze the alarm for 5 minutes.
+Show me my active alarms.
+Cancel all active alarms.
+Reset the current timer.
+Show me my active timers.
+Start a 15-minute countdown.
+Stop all alarms.
+Pause the timer for 5 minutes.
+Restart the alarm for 10 minutes.
+Cancel all active timers.
+Start recording a video log.
+Stop the log.
+Show me my recent video logs.
+Open my latest recording.
+Show me the transcript of the last log.
+Play back my most recent video log.
+Delete the last recording.
+Archive my last log.
+Organize my logs by date.
+Play the video labeled "Team Meeting."
+Delete all logs older than 2 months.
+Record a 2-minute log.
+Label the log "Daily Summary."
+Delete the transcript from yesterday.
+Organize logs by length.
+Record a 1-minute log.
+Turn on the fan.
+Turn off the air conditioning.
+Set the lights to 75%.
+Open the windows.
+Close the windows.
+Switch off the fan.
+Turn on all the lights.
+Adjust the air conditioning to 22°C.
+Dim the lights.
+Set the fan speed to low.
+Turn off all the appliances.
+Activate sleep mode.
+Open the windows halfway.
+Turn the air conditioning to high.
+Adjust the room temperature.
+Turn off all the lights.
+Set the fan to medium speed.
+Close the blinds.
+Search Google for "weather tomorrow."
+Calculate 15 times 8.
+Look up the tallest building in the world.
+Search for "how old is the Earth."
+Find out the population of New York City.
+Calculate 35 divided by 7.
+Search for "most popular TV shows."
+Find out the square root of 225.
+Tell me the capital of Australia.
+Look up the definition of "entropy."
+Search for nearby restaurants.
+Find out the latest headlines.
+Calculate 18% of 250.
+Search for "what's the weather like tomorrow."
+Tell me the square root of 49.
+Look up the latest movie releases.
+Search for information about space exploration.
+Calculate 9 cubed.
+Find out what "quantum physics" means.
+Look up the release date of the next Marvel movie.
+Search for the best hiking trails.
+Look up "new smartphone trends."
+Tell me how far the moon is from Earth.
+Calculate the circumference of a circle with radius 10.
+Search for "history of the internet."
+Find out when the next Olympic Games are.
+Search for the definition of "gravity."
+Calculate 1000 divided by 25.
+Look up the tallest mountain on Earth.
+Search for the latest smartphone reviews.
+Search for top-rated laptops of 2024.
+Could you help me carry these boxes?
+Can you bring me a glass of water?
+Could you close the door behind you?
+Can you pass me the remote?
+Could you pick up some groceries on your way back?
+Can you give me a call later?
+Could you send me that file via email?
+Can you double-check the schedule for tomorrow?
+Could you check if the meeting room is available?
+Can you grab my phone from the kitchen?
+Could you remind me to water the plants?
+Can you make a reservation for dinner tonight?
+Could you tell me what time it is?
+Can you find out if the post office is open?
+Could you give me a ride to the airport?
+Can you turn off the TV before you leave?
+Could you ask Tom to join the call?
+Can you help me set up the projector?
+Could you forward me that message?
+Can you grab a pen from the desk for me?
+Could you let me know when the package arrives?
+Can you stop by the bank after work?
+Could you call the doctor’s office to reschedule my appointment?
+Can you pick up the dry cleaning on your way back?
+Could you reset the Wi-Fi router for me?
+Can you help me set up the printer?
+Could you ask for an update on the project?
+Can you lend me a book to read?
+Could you remind me about the meeting tomorrow?
+Can you tell me when the next bus arrives?
+Could you find out when the library opens?
+Can you help me assemble this bookshelf?
+Could you find the nearest gas station for me?
+Can you text me the address of the restaurant?
+Could you order pizza for dinner tonight?
+Can you print out this document for me?
+Could you put the laundry in the dryer?
+Can you pick up some milk on your way back?
+Could you check if I left my keys on the table?
+Can you charge my phone for me?
+Could you send me the link to that article?
+Can you ask Sarah if she's free this weekend?
+Could you organize the files on my desk?
+Can you help me find my glasses?
+Could you take a picture of this for me?
+Can you let me know when you’re finished with the project?
+Could you reserve a table for us at 7:00 PM?
+Can you upload these documents to the cloud?
+Could you email me the agenda for the meeting?
+Can you check if the lights are off upstairs?
+Close the window before you leave.
+Turn off the lights when you're done.
+Print out the agenda for the meeting.
+Forward the email to the entire team.
+Schedule a call with the client for next week.
+Pick up the package from the front desk.
+Put the dishes in the dishwasher.
+Set the alarm for 7:00 AM tomorrow.
+Arrange the chairs in the meeting room.
+Organize the files on my computer.
+Take out the trash before heading out.
+Clean up the table after dinner.
+Send an update to the team before noon.
+Lock the door when you leave.
+Place the books back on the shelf.
+Respond to the email from the marketing team.
+Write a summary of the meeting.
+Make sure to water the plants today.
+Reset the password for my account.
+Check the weather forecast for tomorrow.
+Charge the laptop before the presentation.
+Hang the coat in the closet.
+Arrange the documents in alphabetical order.
+Vacuum the living room carpet.
+Move the car to the garage.
+Call the plumber to fix the leak.
+Send the contract to the client by email.
+Update the software before the next meeting.
+Finish the report by the end of the day.
+Reserve a conference room for the meeting.
+Label the folders and file them accordingly.
+Take the recycling out to the curb.
+Transfer the files to the external drive.
+Water the garden in the morning.
+Fold the laundry and put it away.
+Pick up the kids from school at 3:00 PM.
+Make a backup copy of the project.
+Send the photos to the printer.
+Organize the pantry by category.
+Pay the utility bills before the deadline.
+Change the batteries in the remote control.
+Defrost the chicken for tonight’s dinner.
+Sweep the porch in the evening.
+Set up the camera for the video shoot.
+Mail the letter to the post office.
+Upload the presentation to the shared folder.
+Cook dinner by 7:00 PM.
+Wrap the gift before the party.
+Pack the lunch for tomorrow morning.
+Sharpen the pencils and place them in the holder.

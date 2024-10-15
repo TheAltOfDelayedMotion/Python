@@ -1,0 +1,17 @@
+Plan for CT-02 
+
+1. Detect Request
+
+if request: 
+    Process accordingly to action -> tokenisation and finding the categorical request
+    - Categorical request (Using tensorflow? or easy tokenisation - see example sentences)
+
+    1. Log -> Video
+    2. Room
+    3. Spotify
+    4. Google queries
+    5. Timers (Numbers?)
+    6. Robot based -> Sleep, Manual control, Test Mode, Reset
+
+if not request:
+    Process accordingly -> Conversation

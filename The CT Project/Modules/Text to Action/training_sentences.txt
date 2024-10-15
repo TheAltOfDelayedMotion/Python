@@ -1,0 +1,200 @@
+Pause my music.
+Play the next song.
+Skip this track.
+Rewind the current song.
+Search for "My Workout Playlist" and play it.
+Play my favorite playlist.
+What song is playing right now?
+Add this song to the queue.
+Play my "Chill Vibes" playlist.
+Find the most recent song in my playlist and play it.
+Shuffle my Spotify playlist.
+Play the song I added yesterday.
+Add this song to my "Morning Routine" playlist.
+What’s the next song in the queue?
+Play the first song from my playlist.
+Replay this song.
+Queue up my favorite artist's latest track.
+Play a song by [artist name].
+Find and play the most popular song from my "Study" playlist.
+Pause and add this track to my favorites.
+Wake me up at 6:00 AM.
+Set an alarm for 7:30 AM.
+Name this alarm "Morning Run."
+Set a timer for 20 minutes.
+How many alarms are currently active?
+What timers are running?
+Set a timer for 45 seconds.
+Wake me up at 8:00 AM tomorrow.
+Set a timer for 2 hours.
+Name this alarm "Meeting Reminder."
+What alarms do I have set for tomorrow?
+Set an alarm for 6:00 PM and name it "Dinner."
+Set a 10-minute countdown timer.
+Name this timer "Study Break."
+Set a 1-hour timer and name it "Exercise."
+How many timers do I have running?
+Set a reminder alarm for 3:00 PM.
+How long is left on my 15-minute timer?
+Set a timer for 30 minutes.
+Find all active alarms for today.
+Start a log recording.
+Stop the log recording.
+Show me the last log I recorded.
+Open the log from yesterday.
+View the transcript of the last video recording.
+Record a new log.
+Play back the video recording from last week.
+Open the first recording from this month.
+Show me the transcript from my last log.
+View the logs recorded in the past two days.
+Stop recording the current log.
+Open the video recording from this morning.
+Show me the log transcript for last Tuesday.
+Record a log for the next 10 minutes.
+View the most recent video log.
+Start recording a new log entry now.
+Play the second log from yesterday.
+View the video log from last night.
+Stop the current log and save it.
+Open the transcript from the previous log.
+Turn on the fan.
+Turn off the lights.
+Close the windows.
+Turn on the air conditioning.
+Open the windows.
+Turn off the air conditioning.
+Go into sleep mode.
+Turn on the lights.
+Set the fan to low speed.
+Dim the lights.
+Close the windows and turn off the lights.
+Open the windows and turn on the fan.
+Turn on the air conditioning and set it to 72°F.
+Put the room into sleep mode.
+Set the air conditioning to 70°F.
+Turn off all the lights and fan.
+Close the windows and turn on the air conditioning.
+Turn off the fan and air conditioning.
+Open the windows and turn on the lights.
+Close the windows and dim the lights.
+What’s 15 plus 20?
+How tall is the Eiffel Tower?
+Multiply 25 by 8.
+What’s the square root of 64?
+Search for the population of Japan.
+What’s 45 divided by 9?
+How far is the moon from Earth?
+Subtract 10 from 50.
+How old is the Great Wall of China?
+Convert 100 euros to USD.
+What’s 8 times 7?
+Who is the current president of the United States?
+Add 100 to 250.
+Search for the capital of Australia.
+Divide 500 by 5.
+What’s the height of Mount Everest?
+Calculate the area of a circle with radius 7.
+Search for the latest news headlines.
+What is the boiling point of water?
+What’s the temperature in New York right now?
+Could you pause the music for a moment?
+Would you mind playing the next song?
+Could you skip this track, please?
+Can you rewind to the beginning of the song?
+Can you find my “Workout” playlist and start it?
+Could you play my favorite playlist?
+Can you tell me what’s currently playing?
+Could you add this song to my queue?
+Can you shuffle my playlist for me?
+Could you replay this song once more?
+Can you add this track to my "Chill Vibes" playlist?
+Would you mind playing the top song in my list?
+Could you queue up the song I liked yesterday?
+Can you switch to my "Morning Routine" playlist?
+Could you play something I added recently?
+Would you play a song by [artist name]?
+Can you find a song that suits my mood?
+Could you tell me what’s next in the queue?
+Can you add the next few songs to my queue?
+Could you help me shuffle all my playlists?
+Could you set an alarm for 7:00 AM tomorrow?
+Can you wake me up at 6:30 AM, please?
+Would you mind naming this alarm "Gym Time"?
+Could you set a 30-minute timer for me?
+Can you tell me which alarms are currently active?
+Would you show me all the timers running right now?
+Could you set a timer for 2 minutes, please?
+Can you set an alarm for 8:00 AM on weekdays?
+Would you mind setting a timer for 45 seconds?
+Can you add a new alarm called "Team Meeting"?
+Could you remind me when this timer ends?
+Can you let me know which alarms are set for today?
+Could you set a timer for 1 hour and call it "Focus Time"?
+Would you mind checking the remaining time on my timer?
+Could you activate an alarm for 5:30 PM?
+Can you reset the timer I started earlier?
+Could you show me all the alarms I have for tomorrow?
+Would you add a countdown timer for 10 minutes?
+Can you name this timer "Exercise" and start it?
+Could you let me know when the 10-minute timer ends?
+Could you start recording a new log?
+Can you stop the log for me?
+Would you mind showing me the last log I recorded?
+Could you open yesterday’s log?
+Can you let me see the transcript of my latest recording?
+Could you start a video recording now?
+Would you play back the log from last week?
+Can you find and open the first recording from this month?
+Could you show me the log transcript for last Tuesday?
+Can you record a new log for the next 10 minutes?
+Would you mind stopping the current log and saving it?
+Could you show me the most recent video log?
+Can you play back the video I recorded this morning?
+Could you pull up the transcript from yesterday’s recording?
+Would you mind starting a new video log right now?
+Could you open the second log from last week?
+Can you find and show me the oldest log I have?
+Would you display all logs from the past two days?
+Could you stop the recording and save it as "Project Notes"?
+Can you let me view the transcript of the recording?
+Could you turn on the fan for me?
+Can you turn off the lights, please?
+Would you mind closing the windows?
+Could you turn on the air conditioning?
+Can you open the windows, please?
+Would you turn off the air conditioning for me?
+Could you put the room into sleep mode?
+Can you turn on the lights?
+Would you lower the fan speed to medium?
+Could you dim the lights a bit?
+Can you close the windows and turn off the fan?
+Would you open the windows and turn on the air conditioning?
+Could you set the air conditioning to 68°F?
+Can you turn off all the lights and the fan?
+Would you mind turning on the lights and closing the windows?
+Could you turn off the fan and open the windows?
+Can you lower the air conditioning temperature to 70°F?
+Would you open the windows and turn on the fan?
+Could you put the room back into active mode?
+Can you dim the lights and close the windows?
+Could you calculate 50 plus 25 for me?
+Can you find out how tall the Empire State Building is?
+Would you mind calculating 35 times 8?
+Could you check the population of Canada?
+Can you divide 144 by 12, please?
+Would you search for the tallest mountain in Europe?
+Could you subtract 15 from 85?
+Can you show me how far the sun is from Earth?
+Would you check the boiling point of gold?
+Could you tell me what the capital of Brazil is?
+Can you add 120 to 250?
+Would you convert 50 pounds to kilograms?
+Could you find out when the Eiffel Tower was built?
+Can you multiply 7 by 9, please?
+Would you search for the latest tech news?
+Could you calculate the area of a square with a side length of 10?
+Can you tell me the average lifespan of a tiger?
+Would you find out what time it is in Tokyo right now?
+Could you check who the prime minister of the UK is?
+Can you find the number of moons orbiting Mars?

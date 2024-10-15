@@ -1,5 +1,4 @@
 # Speech Recognition Module for CT-02 
-# #-please please please concat the segments.texts together thanks
 
 from faster_whisper import WhisperModel
 import numpy as np
