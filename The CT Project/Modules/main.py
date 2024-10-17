@@ -9,9 +9,11 @@ import serial #custom serial library is not needed (see class: serial)
 import pygame
 import pvporcupine
 import threading as th
+import lib_tta_2D as action
 import lib_spotify as spotify
 from pvrecorder import PvRecorder
 from lib_stt import recognizer as SST
+
 arduino = serial.Serial(port='COM5', baudrate=9600, timeout=.1)
 
 #Variables
@@ -26,13 +28,14 @@ WIDTH = 1280
 HEIGHT = 720
 VISION_Y = 480
 truecentre = WIDTH/2
-vision_offset = 30
-movement_pix_sens = 32
+movement_pix_sens = 64
 detector = dlib.get_frontal_face_detector()
+serial_comm_limit = 0.2
 
 #Serial
 class Serial:
     global state
+    
     def serialUpdate():
         global state
         while True:
@@ -149,7 +152,7 @@ def deepsleep():
     getInput_Thread.daemon = True
     
     if getInput_Thread.is_alive() == False and state == "deepsleep": #so that it doesnt keep starting this thread over and over again until the program closes (leaves deep sleep)
-        print("[PYTHON] Deep Sleep threading started")
+        #print("[PYTHON] Deep Sleep threading started")
         getInput_Thread.run()
 
 def listen():
@@ -171,15 +174,24 @@ def listen():
 
 def textToAction():
     global speech
+    
     if speech != None:
-        #print(f"[PYSST] {speech}")
-        if speech.find("play") >= 0:
-            spotify.play()
+        if action.process(speech) == True: #it is a request
+            #Request processing
+            pass
         
-        elif speech.find("pause") >= 0:
-            spotify.pause()
+        else: 
+            pass #if it is conversation do something else 
+    
+    # if speech != None:
+    #     #print(f"[PYSST] {speech}")
+    #     if speech.find("play") >= 0:
+    #         spotify.play()
         
-        speech = None
+    #     elif speech.find("pause") >= 0:
+    #         spotify.pause()
+        
+        speech = None #reset speech to None
 
 #Threading
 serialUpdate_thread = th.Thread(target=Serial.serialUpdate)
@@ -280,12 +292,11 @@ def main():
         
             new_frame_time = time.time() 
             fps = 1/(new_frame_time-prev_frame_time)     
-            if (new_frame_time-prev_frame_time) >= 0.1:
+            if (new_frame_time-prev_frame_time) >= serial_comm_limit:
                 prev_frame_time = new_frame_time 
                 fps = int(fps) 
                 
                 if (face_x != 0) or (face_y != 0):
-                    #print(f"FPS: {fps} | X{face_x} Y{face_y}")
                     if (abs(face_x - prev_face_x) > movement_pix_sens):
                         Serial.write(f"09/{face_x}")
                         print(f"\n[PYTHON] Sent: 09/{face_x} | FPS: {fps}")
@@ -295,7 +306,7 @@ def main():
             cv2.imshow('frame', frame)
             key = cv2.waitKey(1) & 0xFF
 
-            if key == ord("q"):
+            if key == ord("q") or key == ord("Q"):
                 print("Quitting...")
                 vid.release() 
                 cv2.destroyAllWindows() 
@@ -332,7 +343,7 @@ while __name__ == "__main__":
         # checking if keydown event happened or not
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                print("[PYTHON] ESC Forcing Deep Sleep...")
+                print("[PYTHON] ESC Forcing Hibernation...")
                 Serial.write("00/deepsleep")
                 state = "deepsleep"
        

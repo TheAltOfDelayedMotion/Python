@@ -333,7 +333,7 @@ def processSum(sentence):
     
     return sum
     
-def process(sentence, returnbool = True):   
+def process(sentence, returnbool = True):   #If request, returns True, else, returns False
     req_bool = False #Default returns false
     sentence.lower()
     phrase = sentence.split()
@@ -372,7 +372,7 @@ def process(sentence, returnbool = True):
         return req_bool #if req, return true, else False
     
     else: 
-        return average
+        return average 
 
 def testForConv():
     wrongly_identified = {}
@@ -397,27 +397,41 @@ def testForConv():
     print(f"Percentage Accuracy = {(n_sentences-n_wrongsentences)/n_sentences*100}%")
     
 def testForReq():
+    #Test Request Sentences
     wrongly_identified = {}
-    with open(r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Text to Action\test_sentences.txt", "r+") as test_data:
+    with open(T_TEST_REQUEST, "r+", encoding="UTF-8") as test_data:
         n_sentences = 0
         n_wrongsentences = 0
+        n_correctsentences = 0
+        total_wrong_score = 0
+        total_correct_score = 0
+        
         for sentence in test_data:
             n_sentences += 1
             sentence = sentence.replace("\n", "")
-            sum = process(sentence)
+            score = process(sentence, False)
+            #total_correct_score = score + total_correct_score
             
-            if sum <= 0:
+            if score <= 0: #Testing for request sentences
                 n_wrongsentences += 1
-                print("Wrongly Identified!\n")
-                wrongly_identified[sentence] = sum
+                #print("Wrongly Identified!\n") No need for this due to color coding
+                wrongly_identified[sentence] = score
+                total_wrong_score += score
                 
-    
+            else: #Find the average score for correct sentences
+                n_correctsentences += 1
+                total_correct_score += score
+        
     test_data.close()
     
     print("\n")
-    print(f"Wrongly Identified Sentences: \n{wrongly_identified}\n")
-    print(f"Percentage Accuracy = {(n_sentences-n_wrongsentences)/n_sentences*100}%")
-
+    #print(f"Wrongly Identified Sentences: \n{wrongly_identified}\n")
+    average_correct_score = total_correct_score/n_correctsentences
+    average_wrong_score = total_wrong_score/n_wrongsentences
+    print(Fore.LIGHTCYAN_EX + f"AvCorrScore: {average_correct_score} | AvWrongScore: {average_wrong_score} | Midpoint: {(average_correct_score + average_wrong_score)/2}")
+    print(Fore.LIGHTGREEN_EX + f"Percentage Accuracy = {(n_sentences-n_wrongsentences)/n_sentences*100}%" + Fore.RESET)
+    
 # while True:
 #     sentence = input("User: ")
 #     process(sentence)
+
