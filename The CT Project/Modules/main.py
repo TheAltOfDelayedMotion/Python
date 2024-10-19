@@ -177,6 +177,9 @@ def textToAction():
     
     if speech != None:
         if action.process(speech) == True: #it is a request
+            if speech.find("phone") != -1:
+                Serial.write("05/eject")
+                
             #Request processing
             pass
         

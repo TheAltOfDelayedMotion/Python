@@ -29,7 +29,6 @@ Wake me up at 6.15 a.m.
 
 common_words = {}
 deletion_repetition = 1 #Delete trained word if only repeated once
-repeat_allowance = 3 #words are only allowed to be found in a maximum of 3 dictionaries
 
 #Paths
 T_NEUTRAL = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Text to Action\train_neutral.txt"
@@ -37,6 +36,99 @@ T_REQUEST = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Co
 T_TEST_NEUTRAL = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Text to Action\test_neutral.txt"
 T_TEST_REQUEST = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Text to Action\test_requests.txt"
 T_XY_TRAINING = r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Text to Action\XY_training.txt"
+
+def training():
+    request_file = open(T_REQUEST, "r", encoding="UTF-8")
+    for sentence in request_file:
+        #print(sentence)
+        
+        sentence = sentence.lower()
+        sentence = sentence.split()
+        
+        for word in sentence:
+            #remove ' from training data and replace with is
+            if word.find("’s") >= 0:
+                if request_dictionary.get("is") != None:
+                    request_dictionary["is"] = request_dictionary["is"] + 1
+                    
+                else:
+                    request_dictionary["is"] = 0
+            
+                word = word.replace("’s", "")
+                
+            #remove any punctuation from training data and replace with ""
+            for letter in word:
+                if not (ord(letter) >= 97 and ord(letter) <= 122): 
+                    word = word.replace(letter, "")
+            
+            if request_dictionary.get(word) != None:
+                request_dictionary[word] = request_dictionary[word] + 1
+                
+            else:
+                request_dictionary[word] = 0
+                
+    #print(request_dictionary)    
+    request_file.close()
+    #print(request_dictionary)
+    #print("\n")
+
+    #Commence conversational dictionary
+    conversational_file = open(T_NEUTRAL, "r", encoding="UTF-8")
+    for sentence in conversational_file:
+        #print(sentence)
+        
+        sentence = sentence.lower()
+        sentence = sentence.split()
+        
+        for word in sentence:
+            #remove ' from training data and replace with is
+            if word.find("’s") >= 0:
+                if conversational_dictionary.get("is") != None:
+                    conversational_dictionary["is"] = conversational_dictionary["is"] + 1
+                    
+                else:
+                    conversational_dictionary["is"] = 0
+            
+                word = word.replace("’s", "")
+                
+            #remove any punctuation from training data and replace with ""
+            for letter in word:
+                if not (ord(letter) >= 97 and ord(letter) <= 122): 
+                    word = word.replace(letter, "")
+            
+            if conversational_dictionary.get(word) != None:
+                conversational_dictionary[word] = conversational_dictionary[word] + 1
+                
+            else:
+                conversational_dictionary[word] = 0
+                
+    conversational_file.close()
+    #print(conversational_dictionary)
+    #print("\n")
+    
+    request_final = dict(request_dictionary)
+    conversational_final = dict(conversational_dictionary)
+    #Commence Filtration
+    for item in request_dictionary:
+        if request_dictionary.get(item) <= deletion_repetition:
+            request_final.pop(item)
+        
+    for item in conversational_dictionary:
+        if conversational_dictionary.get(item) <= deletion_repetition:
+            conversational_final.pop(item)
+            
+    print(request_final)
+    print(conversational_final)
+    
+    #Save Dictionary Data
+    
+    request_data = open(r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Text to Action\Data\request_data.pkl", "wb")
+    pickle.dump(request_final, request_data)
+    request_data.close()
+    
+    conversational_data = open(r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Text to Action\Data\conversational_data.pkl", "wb")
+    pickle.dump(conversational_final, conversational_data)
+    conversational_data.close()
 
 def train(loops = 1, cutoff_score = 6): #Number of training loops
     loopnumber = 1
@@ -194,7 +286,7 @@ def isInRange(min, max, value):
     if value > min and value < max:
         return True
 
-def addVectorList(vectors):
+def addVectorListNew(vectors):
     x_forces = []
     y_forces = []
     for vector in vectors: #find the x & y component of each vector
@@ -288,6 +380,46 @@ def addVectorList(vectors):
     else:
         return [0, 0]
         
+# def addVectorList(vectors):
+#     #Vector Calculation
+#     n = 0
+#     vector_storage = []
+#     #first loop is seperate due to the possibility of odd number of vectors
+    
+#     print(Fore.LIGHTMAGENTA_EX + f"0th V_A Cycle: {vectors}" + Fore.RESET) 
+#     while n < len(vectors):
+#         current_v = vectors[n] 
+#         try:
+#             next_v = vectors[vectors.index(current_v) + 1]
+#         except IndexError: #for odd number of vectors
+#             print(Fore.RED + "[TTA] ODD!! Next Vector not Found" + Fore.RESET)
+#             next_v = [0, 360]
+        
+#         r_vector = addVectorNew(current_v, next_v)
+#         #print(f"[TTA] Resultant Vector: {r_vector}")
+#         vector_storage.append(r_vector)
+#         n += 2
+    
+#     final_vectors = list(vector_storage)
+#     print(Fore.LIGHTMAGENTA_EX + f"1st V_A Cycle: {final_vectors}" + Fore.RESET) 
+    
+#     #final vector addition
+#     while len(final_vectors) != 1:
+#         temp_vectors = []
+#         n = 0
+        
+#         #Goes through final_vectors once and stores n/2 vector list as temp_vectors
+#         while n < len(final_vectors):
+#             v_r = addVectorNew(final_vectors[n], final_vectors[n+1])
+#             temp_vectors.append(v_r)
+#             n += 2
+            
+#         final_vectors = list(temp_vectors) #change final_vectors at the end
+#         print(Fore.LIGHTMAGENTA_EX + f"2nd V_A Cycle: {final_vectors}" + Fore.RESET)
+    
+#     #print(final_vectors)
+#     return final_vectors[0]
+        
 def process(sentence):   
     theta = 360/len(listofcats) #Basic angle (Based on how many categories)
     dict_direction = {}
@@ -325,32 +457,19 @@ def process(sentence):
                 magnitude = 0
                 direction = angle
             
-            if magnitude != 0:
-                dictionary_index = dictionaries_data.index(dictionary)
-                dictionary_name = listofcats[dictionary_index]
-                print(Fore.YELLOW + f"| {dictionary_name.capitalize()} | Word: '{word}' | M: {magnitude} | D: {direction} |" + Fore.RESET)
-            
-            
+            print(Fore.YELLOW + f"Vector '{word}': M:{magnitude}, D{direction}" + Fore.RESET)
             vectors.append([magnitude, direction]) #[[Magnitude, Direction], [M1, D1]]
             angle = angle + theta #each dictionary has a different direction
-        
+            
         #Vector Calculation
-        resultant_vector = addVectorList(vectors)
+        resultant_vector = addVectorListNew(vectors)
         if (round(resultant_vector[1]/theta) * 45) == 360:
             category = dict_direction.get(0)
         else:
             category = dict_direction.get(round(resultant_vector[1]/theta) * 45)
         print(Fore.GREEN + f"[TTA] Word: {word} | M:{resultant_vector[0]} D:{resultant_vector[1]} | Cat: {category}" + Fore.RESET + "\n")
 
-        times_repeated = 0
-        for vector in vectors:
-            if vector[0] != 0:
-                times_repeated += 1
-        
-        if times_repeated <= repeat_allowance:
-            sentence_vectors.append(resultant_vector)
-        else: 
-            print(Fore.RED + f"[TTA] Disregarding '{word}' (Too Common!)" + Fore.RESET)
+        sentence_vectors.append(resultant_vector)
         
     #Filtration
     #print(Fore.LIGHTGREEN_EX + f"[TTA] Begin Filtration")
@@ -363,7 +482,7 @@ def process(sentence):
 
     #Vector Calculation for Sentence 
     print(Fore.LIGHTCYAN_EX + f"[TTA] Calculating Vector for '{sentence}'" + Fore.RESET)
-    resultant_vector = addVectorList(sentence_vectors)
+    resultant_vector = addVectorListNew(sentence_vectors)
     resultant_vector = [resultant_vector[0]/n_words, resultant_vector[1]]
     
     print(Fore.GREEN + f"[TTA] Resultant Vector: {resultant_vector}" + Fore.RESET)
@@ -378,7 +497,5 @@ def process(sentence):
     print(Fore.GREEN + f"[TTA] Category: {category}" + Fore.RESET)
     return category
 
-# train()
-# while True:
-#     command = input("User: ")
-#     process(command)
+train()
+process("open my blinds")
