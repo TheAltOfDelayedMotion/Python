@@ -220,7 +220,7 @@ def self_train(loops = 1, cutoff_score = 6): #Number of training loops
             for sentence in test_data:
                 n_sentences += 1
                 sentence = sentence.replace("\n", "")
-                score = process(sentence, False)
+                score = processZ(sentence, False)
                 #total_correct_score = score + total_correct_score
                 
                 if score >= 0: #Testing for conversational sentences
@@ -264,7 +264,7 @@ def self_train(loops = 1, cutoff_score = 6): #Number of training loops
             for sentence in test_data:
                 n_sentences += 1
                 sentence = sentence.replace("\n", "")
-                score = process(sentence, False)
+                score = processZ(sentence, False)
                 #total_correct_score = score + total_correct_score
                 
                 if score <= 0: #Testing for request sentences
@@ -333,7 +333,7 @@ def processSum(sentence):
     
     return sum
     
-def process(sentence, returnbool = True):   
+def processZ(sentence, returnbool = True):   
     req_bool = False #Default returns false
     sentence.lower()
     phrase = sentence.split()
@@ -382,7 +382,7 @@ def testForConv():
         for sentence in test_data:
             n_sentences += 1
             sentence = sentence.replace("\n", "")
-            sum = process(sentence)
+            sum = processZ(sentence)
             
             if sum >= 0:
                 n_wrongsentences += 1
@@ -409,7 +409,7 @@ def testForReq():
         for sentence in test_data:
             n_sentences += 1
             sentence = sentence.replace("\n", "")
-            score = process(sentence, False)
+            score = processZ(sentence, False)
             #total_correct_score = score + total_correct_score
             
             if score <= 0: #Testing for request sentences

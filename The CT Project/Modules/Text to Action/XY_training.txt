@@ -1,65 +1,85 @@
-///google_dictionary///
-How tall is the Eiffel Tower?
-What is the population of Tokyo?
-Who won the Best Actor Oscar in 2023?
-What time does the sun set today?
-How do you bake a chocolate cake?
-What’s the weather like tomorrow in New York?
-How far is it from Los Angeles to San Francisco?
-What is the capital of Australia?
-Who invented the telephone?
-What is the definition of quantum physics?
-How many calories are in a banana?
-What is the largest animal on Earth?
-How old is the Earth?
-Who is the richest person in the world?
-What is the boiling point of water?
-When was the internet invented?
-How much does a Tesla Model 3 cost?
-What’s the best way to learn French?
-What’s the latest iPhone model?
-What time is it in London right now?
-How long does it take to fly to Tokyo from New York?
-What is the highest mountain in North America?
-How do you solve a Rubik’s Cube?
-What’s the best restaurant in Paris?
-Who is the president of Brazil?
-What are the symptoms of the flu?
-How do you write a business proposal?
-What are the top tourist attractions in Italy?
-How many hours are in a year?
-What’s the average salary of a software engineer in 2024?
+///reminder_dictionary///
+Remind me at 7.00 a.m. to call John.
+Set a reminder for 3.00 p.m. to check emails.
+Add a reminder for tomorrow at 10.00 a.m.
+Mark the 6.00 p.m. reminder as done.
+Delete the reminder for 5.00 p.m. tomorrow.
+Remind me to pick up groceries at 5.30 p.m.
+Show me my reminders for today.
+Edit my 8.00 a.m. reminder to 9.00 a.m.
+What are my reminders for tomorrow?
+Add a reminder to walk the dog at 8.00 a.m.
+Remind me to water the plants at 4.00 p.m.
+Mark the 9.00 a.m. reminder as complete.
+Delete all reminders for today.
+Set a reminder for next Monday at 10.00 a.m.
+Remind me at noon to take my medicine.
+Show me the reminders I have for this week.
+Change the 7.00 p.m. reminder to 8.00 p.m.
+Add a reminder to finish my project at 2.00 p.m.
+Remind me at 5.00 p.m. to call the bank.
+Delete my reminder for 6.00 p.m. today.
+Edit the 3.00 p.m. reminder to 4.00 p.m.
+What reminders are left for today?
+Remind me to do laundry at 11.00 a.m.
+Mark my 5.00 p.m. reminder as done.
+Add a new reminder for this Friday at 3.00 p.m.
+Show me my reminders for the next three days.
+Delete my reminder for 7.00 a.m. tomorrow.
+Set a reminder to check the mail at 10.30 a.m.
+Remind me at 9.30 a.m. to send the email.
+Edit my reminder for 2.00 p.m. to 2.30 p.m.
+What are my reminders for next week?
+Remind me to call my boss at 1.00 p.m.
+Delete all reminders for this afternoon.
+Set a reminder to attend the meeting at 9.00 a.m.
+Mark the 4.00 p.m. reminder as complete.
+Show me all reminders for this weekend.
+Remind me at 11.00 a.m. to finish my assignment.
+Change the 12.00 p.m. reminder to 12.30 p.m.
+Add a reminder for 8.00 p.m. to read a book.
+Remind me to check the news at 7.00 a.m.
 ///room_dictonary///
 Turn on the fan.
 Turn off the fan.
+Open the windows.
+Close the windows.
+Turn on the lights.
+Turn off the lights.
+Open the blinds.
+Close the blinds.
 Set the fan to low speed.
 Set the fan to high speed.
 Dim the lights.
-Turn on all the lights.
-Turn off all the lights.
-Open the windows.
-Close the windows.
-Open the blinds halfway.
-Close the blinds completely.
-Open the blinds fully.
-Close the windows and blinds.
-Set the aircon to 22 degrees.
-Turn off the aircon.
+Brighten the lights.
 Turn on the aircon.
-Set the aircon to cooling mode.
-Switch the fan to medium speed.
-Brighten the lights to maximum.
-Open just the left window.
-Close just the right window.
-Set the fan to oscillate.
-Lower the blinds a little.
-Turn on the aircon’s fan mode.
-Set the aircon to 25 degrees.
+Turn off the aircon.
+Open the blinds halfway.
+Close the windows halfway.
+Adjust the fan to medium speed.
+Set the aircon to 22 degrees.
+Turn off the lights in the living room.
+Open all the windows.
+Close the blinds completely.
 Turn off the fan and aircon.
-Open both the windows and blinds.
-Close the blinds and dim the lights.
-Turn on the lights and open the windows.
-Set the aircon to energy-saving mode.
+Set the lights to warm mode.
+Turn on the fan and aircon.
+Open the windows slightly.
+Close the blinds halfway.
+Set the fan to maximum speed.
+Turn on the aircon at 24 degrees.
+Close all the windows.
+Brighten the lights in the kitchen.
+Set the blinds to open just a little.
+Turn off the lights and fan.
+Turn on the lights in my bedroom.
+Turn off the aircon and fan.
+Close the windows and blinds.
+Set the aircon to cool mode.
+Open the blinds fully.
+Turn off all the lights.
+Turn on the fan at medium speed.
+Open the windows in the living room.
 ///music_dictionary///
 Pause my music.
 Play my Spotify.
@@ -80,12 +100,10 @@ Skip to the next Spotify track.
 Rewind the music by 30 seconds.
 Add this track to my music favorites.
 Pause my chill playlist.
-Play my last added song on Spotify.
 Skip two songs ahead on Spotify.
 Pause the music for a minute.
 Rewind to the start of this track.
 Play "Bohemian Rhapsody" on Spotify.
-Pause the music after this song.
 Add this song to my Spotify queue.
 Play my party music playlist.
 Pause the next song on Spotify.
@@ -104,165 +122,208 @@ Rewind and play the song on Spotify.
 Pause the track and add it to favorites.
 Skip to the next track in my music.
 Play "Shape of You" on Spotify.
-Pause the music and restart it.
-Add this song to my favorites on Spotify.
-Play my evening playlist on Spotify.
-Pause the track and rewind it.
-Skip to the next song on my music playlist.
-Pause the Spotify playlist after the next song.
-Play my chill music and add it to favorites.
 ///alarm_dictionary///
-Wake me up at 6.15 a.m.
-Set an alarm for 7.00 a.m.
-Turn off the 4.22 a.m. alarm.
-Set a 6.00 p.m. reminder.
-Wake me up at 5.30 a.m. tomorrow.
-Remove the 7.00 p.m. alarm.
-Turn on my 6.15 a.m. alarm.
-Delete the 6.45 a.m. alarm.
-Set a daily alarm for 6.00 a.m.
-Wake me up at 4.22 a.m. on weekdays.
-Add an alarm for 7.00 p.m. tonight.
-Turn off the 6.15 a.m. alarm for tomorrow.
-Set an alarm for 8.30 a.m.
-Cancel the alarm for 6.15 a.m.
-Set a recurring alarm for 7.00 a.m.
-Turn off all alarms after 6.00 p.m.
-Wake me up at 5.00 a.m.
-Remove my 4.22 a.m. alarm permanently.
-Turn on the 6.15 a.m. alarm for the weekend.
-Set an alarm for 7.30 p.m. tomorrow.
-Wake me up at 5.45 a.m. every Monday.
-Delete the alarm set for 7.00 p.m.
-Create a new alarm for 4.22 a.m.
-Turn off the alarm scheduled for 6.00 a.m.
-Set an alarm for 6.30 a.m. and name it "Morning Run."
-Activate my 4.22 a.m. alarm.
-Remove the 6.15 a.m. alarm for weekends.
-Set a reminder for 7.00 p.m. tonight.
-Turn off the 6.00 p.m. alarm today.
-Wake me up at 6.45 a.m. on Saturday.
+Set an alarm for 6.00 a.m.
+Wake me up at 7.00 a.m.
+Turn on my 5.30 a.m. alarm.
+Delete my 8.00 a.m. alarm.
+Set an alarm for 9.15 p.m.
+Turn off my 6.00 p.m. alarm.
+Edit my 7.30 a.m. alarm to 8.00 a.m.
+Set a daily alarm for 6.45 a.m.
+Set an alarm for 10.00 a.m. tomorrow.
+Remove my 9.00 a.m. alarm.
+Add a new alarm for 4.22 a.m.
+Change my 6.00 a.m. alarm to 6.15 a.m.
+Turn off all alarms.
+Set an alarm for 5.30 p.m.
+Turn on my 7.00 a.m. alarm.
+Delete my alarm for tomorrow at 8.00 a.m.
+Set an alarm for 11.00 p.m.
+Wake me up at 4.22 a.m.
+Turn off the 9.00 p.m. alarm.
+Set a reminder to wake up at 7.30 a.m.
+Set a new alarm for 6.15 p.m.
+Edit my 10.00 p.m. alarm to 10.30 p.m.
+Remove my 5.00 a.m. alarm.
+Set an alarm for Monday at 8.00 a.m.
+Turn off my evening alarm.
+Set an alarm for tomorrow at 7.00 a.m.
+Turn on my 5.45 a.m. alarm.
+Delete all my alarms.
+Set an alarm for next week at 9.00 a.m.
+Wake me up at 8.00 a.m. on Saturday.
+Turn off my 10.30 a.m. alarm.
+Change my 11.00 a.m. alarm to 11.15 a.m.
+Set an alarm for this Friday at 6.00 a.m.
+Remove my evening alarm.
+Set a repeating alarm for 6.00 a.m. every day.
+Set an alarm for 6.00 p.m. tomorrow.
+Wake me up at 5.00 a.m. sharp.
+Turn off the 6.15 a.m. alarm.
+Set a new alarm for 10.00 a.m. next Monday.
+Wake me up at 7.00 a.m. on the weekend.
 ///timer_dictionary///
-Set a timer for 30 minutes.
-Start a timer for 1 hour and 15 minutes.
-Stop the 20 minute timer.
-Set a 5 minute timer.
-Start a 2 hour timer.
-Pause the timer.
-How much time is left on the 45 minute timer?
-Set a timer for 1 hour and 2 minutes.
+Set a timer for 10 minutes.
+Start a timer for 1 hour.
+Stop the 30 minute timer.
+Reset the 15 minute timer.
+Set a 5 minute timer for cooking.
+Start a timer for 2 hours and 20 minutes.
 Stop all active timers.
-Start the stopwatch now.
-Reset the stopwatch.
-Stop the stopwatch after 10 minutes.
-How long has the stopwatch been running?
-Set a 10 second timer.
-Start a timer for 15 minutes and 30 seconds.
-Check the progress of the timer.
-Set a timer for 3 hours.
-Pause the stopwatch.
-Start the stopwatch again.
-How much time has passed on the stopwatch?
-Set a 2 hour and 45 minute timer.
-Stop the current timer.
-Restart the timer for 1 hour.
-Set a countdown timer for 20 minutes.
-What’s the time left on the 1 hour timer?
-Start a 10 minute timer now.
-Stop the stopwatch immediately.
-Reset the timer and start a new one for 50 minutes.
-How long has the current timer been running?
-Start the stopwatch and let me know after 5 minutes.
+Check the progress of the 10 minute timer.
+Set a 45 second timer.
+Set a timer for 6 hours and 15 minutes.
+Cancel the 2 hour timer.
+Start a 20 minute countdown.
+Set a timer for 8 minutes and 30 seconds.
+Check how much time is left on the 1 hour timer.
+Pause the timer for 5 minutes.
+Restart the 10 minute timer.
+Set a timer for 2 hours and 5 minutes.
+Start a 1 minute countdown.
+Show me all active timers.
+Set a timer for 3 minutes and 45 seconds.
+Cancel the timer for 10 minutes.
+Start the 15 second timer.
+Set a timer for 4 hours and 10 minutes.
+Check the remaining time on the 20 minute timer.
+Start a new timer for 1 hour and 30 minutes.
+Set a timer for 7 minutes.
+Pause the 30 minute timer.
+Stop all timers.
+Restart the 5 minute timer.
+Set a timer for 12 minutes.
+Start the 50 second timer.
+How much time is left on the 2 hour timer?
+Set a countdown for 1 hour and 15 minutes.
+Start the 3 minute timer.
+Reset the 10 second timer.
+Set a 25 minute timer for studying.
+Start a timer for 15 minutes.
+Cancel the 45 second timer.
+Set a 30 second timer for the microwave.
+Check the progress of the 45 minute timer.
 ///calendar_dictionary///
-Add a meeting to my calendar at 2 p.m. tomorrow.
-Schedule a dentist appointment for 10 a.m. next Tuesday.
-Create an event called "Team Meeting" at 3 p.m. today.
-Set a reminder for my flight at 7 a.m. next Monday.
-Schedule a call with John at 1 p.m. on Friday.
-Move my meeting from 4 p.m. to 5 p.m.
-View my events for tomorrow.
-What’s on my calendar for this week?
-Add a birthday party event on October 23rd at 6 p.m.
-Set up a lunch appointment for 12 p.m. today.
-Edit my meeting on Wednesday to start at 2 p.m. instead of 3 p.m.
-View all events for this month.
-Cancel the event scheduled for 9 a.m. tomorrow.
-Create a recurring event for yoga every Wednesday at 6 p.m.
-Schedule a conference call for next Thursday at 11 a.m.
-Show me all upcoming events for next week.
-Postpone my 2 p.m. meeting to 3 p.m.
-Add a gym session on Friday at 8 a.m.
-View my calendar for today.
-Delete the event scheduled for Friday at 4 p.m.
-Change the location of my meeting tomorrow to Zoom.
-Create a meeting with Sarah at 10 a.m. next Monday.
-Reschedule my doctor's appointment to 5 p.m.
-Show me the events for this weekend.
-Add a reminder for the meeting at 2 p.m.
-View my calendar for next month.
-Move my presentation from 11 a.m. to 1 p.m. next Wednesday.
-Add a deadline to my calendar on October 31st at 5 p.m.
-Create an all-day event for my vacation starting on December 1st.
-Schedule a business trip for next Friday at 9 a.m.
+Add a new event to my calendar.
+Create a new event for tomorrow at 8.00 a.m.
+Add a new event for Saturday at 7.00 p.m.
+What are my events for this week?
+Show me my events for today.
+Add tuition at 6.00 p.m. on Saturday to my calendar.
+Schedule a meeting for Monday at 9.00 a.m.
+Create a reminder to call John at 3.00 p.m. tomorrow.
+What events do I have tomorrow?
+Add lunch with Sarah at 1.00 p.m. on Friday.
+Edit my 2.00 p.m. event to 3.00 p.m.
+Delete my event for tomorrow at 10.00 a.m.
+Show me all events for the weekend.
+Schedule a call with Mike at 4.00 p.m. on Wednesday.
+Add a birthday event for June 5th.
+Create a new event named "Gym" at 5.00 p.m. today.
+What events are planned for this weekend?
+Schedule a doctor's appointment for next Tuesday at 11.00 a.m.
+Delete all events for today.
+Move my 6.00 p.m. event to 7.00 p.m.
+Add a work meeting on Friday at 2.00 p.m.
+Show me my events for next month.
+What events do I have this weekend?
+Schedule a new event called "Dinner" at 7.00 p.m. tonight.
+Edit the event on Thursday from 9.00 a.m. to 10.00 a.m.
+Delete my 1.00 p.m. event for tomorrow.
+Show me all events for next week.
+Add a team meeting at 10.00 a.m. next Monday.
+What events do I have on Tuesday?
+Create a birthday reminder for Saturday at 5.00 p.m.
+Add a dentist appointment on Thursday at 2.00 p.m.
+Show me all events for today.
+Move my 4.00 p.m. event to 5.00 p.m.
+Schedule a catch-up call with Sarah for Friday at 6.00 p.m.
+Delete all events for tomorrow.
+Add a new event called "Shopping" at 3.00 p.m. today.
+Show me my events for the next three days.
+Schedule a coffee meeting at 2.00 p.m. on Sunday.
+What events do I have planned for this evening?
+Edit my Saturday event to 6.00 p.m. instead of 7.00 p.m.
 ///log_dictionary///
-Start a new log recording.
-Stop the current log.
-Show me my latest log.
-View all logs from this week.
-Start recording a new log now.
-Stop the video log.
-Open the log I recorded yesterday.
-Show the transcript for my last log.
-Start a video log for today.
-View my log from October 1st.
-Stop and save the current log.
-Show me all logs from this month.
-Play the video log from last Monday.
-Open my most recent recording.
-View the transcript from today’s log.
-Begin recording a new personal log.
-Stop logging and save it.
-Open the recording from last week.
-Show me the transcript of yesterday’s log.
-Start a new log for my morning routine.
-View all my video logs.
-Stop recording the log now.
-Play my first log from this month.
-Show me the transcript for my latest log.
-Start a new video log session.
-Open the log from two days ago.
-Show the transcript from the log recorded this morning.
-Begin a video log for my afternoon session.
-Stop the log recording and archive it.
-Open the last log and show me the transcript.
+Start a log recording.
+Start a new log.
+View my log from yesterday.
+View my log from .
+Stop my log.
+I'm done with my log.
+Delete my log.
+Create a new log with transcript.
+Start recording a new log for today.
+View my log from last week.
+Stop the log recording now.
+Show me the log from yesterday's session.
+Start a new log recording for today.
+I'm finished with my log for today.
+Erase the current log.
+Show my log transcript from today.
+View the log from October 15th.
+Show me my log from this morning.
+Stop the log after 5 minutes.
+I’m done with this log, stop recording.
+Delete the log from yesterday.
+Start a fresh log recording now.
+View the log I recorded last Friday.
+Show me my log from earlier today.
+Stop the log recording after 10 minutes.
+I'm done with today’s log.
+Start a new log for tomorrow’s session.
+Show me the log from two days ago.
+View my log from this afternoon.
+Delete my log from last week.
+Create a new log for my evening tasks.
+View the log I recorded last Monday with my transcript.
+Stop recording the log and save it.
+Show me my log from yesterday's meeting.
+Start a new log for my workout session.
+I'm done with the log for now.
+Delete the log I recorded earlier today.
+Start recording a new log entry.
+View the log I made on October 1st.
+Stop my log after this task.
 ///command_dictionary///
-Go to sleep mode now.
-Hibernate the robot.
+Go to sleep mode.
+Enter hibernate mode.
 Eject my phone from the port.
 Shut down the system.
 Kill the main thread.
-Activate sleep mode.
-Put the robot in hibernation.
-Remove my phone from the charging port.
-Power down the robot.
-Terminate the main thread.
-Enter sleep mode.
-Initiate hibernation.
-Disconnect my phone from the port.
-Execute shutdown procedures.
-Stop the main thread immediately.
-Go into sleep mode for an hour.
-Hibernate until I wake you up.
-Eject the phone from the dock.
-Perform a system shutdown.
-Kill all active threads.
-Switch to sleep mode now.
-Activate hibernation mode.
-Give me my phone.
+Remove my phone from the dock.
+Put the robot into sleep mode.
+Hibernate until further notice.
+Eject my phone now.
 Shut down all systems.
-Terminate the current thread.
-Set the robot to sleep mode.
-Enter hibernation for the night.
-Unplug my phone from the port.
-Complete a full shutdown.
-Stop the main thread execution.
+Kill the main code thread.
+Go into sleep mode immediately.
+Enter hibernate mode now.
+Eject my phone from the charging port.
+Power down and shut off the system.
+Terminate the main thread process.
+Remove my phone from the port.
+Sleep mode, please.
+Activate hibernate mode.
+Eject my phone right away.
+Shut down all robot functions.
+Stop and kill the main thread.
+Sleep mode now.
+Hibernate and pause all operations.
+Eject the phone from the port.
+Shut down everything.
+End the main thread task.
+Go into sleep mode for now.
+Hibernate the system until I need it.
+Eject my phone immediately.
+Shut down the robot completely.
+Terminate the main thread function.
+Activate sleep mode.
+Enter hibernation mode.
+Remove my phone from the system port.
+Shut down and power off.
+Stop and kill the main thread process.
+Put the system into sleep mode.
+Hibernate all operations.
+Eject my phone and stop charging.

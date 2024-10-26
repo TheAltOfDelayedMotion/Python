@@ -1,6 +1,10 @@
 import pickle
 import math
+from googlesearch import search
+from googlesearch import SearchResult
 from colorama import Fore
+import lib_spotify as spotify
+#from tta_1D import vectCalcZ as vectCalcZ
 
 #Dictionaries 
 #Z Axis Dictionaries 
@@ -212,7 +216,7 @@ def addVectorList(vectors):
     else:
         return [0, 0]
         
-def process(sentence):   
+def vectCalcXY(sentence):   
     theta = 360/len(listofcats) #Basic angle (Based on how many categories)
     dict_direction = {}
     
@@ -227,6 +231,7 @@ def process(sentence):
     
     sentence_vectors = []
     dictionaries_data = []
+    keywords = {}
     
     x = 0
     for dictionary in listofdicts:
@@ -236,7 +241,17 @@ def process(sentence):
         x+=1
         
     for word in sentence: #word by word
-        print(Fore.LIGHTCYAN_EX + f"[TTA] Calculating Vector for '{word}'" + Fore.RESET)
+        #remove punctuation
+        if word.find("’s") >= 0:        
+            word = word.replace("’s", "")
+
+        if word != "a.m." and word != "p.m.":
+            #remove any punctuation from training data and replace with ""
+            for letter in word:
+                if not (ord(letter) >= 97 and ord(letter) <= 122): 
+                    word = word.replace(letter, "")
+        
+        #print(Fore.LIGHTCYAN_EX + f"[TTA] Calculating Vector for '{word}'" + Fore.RESET)
         angle = 0
         vectors = [] #should be storing all the vectors for each word
         
@@ -252,8 +267,7 @@ def process(sentence):
             if magnitude != 0:
                 dictionary_index = dictionaries_data.index(dictionary)
                 dictionary_name = listofcats[dictionary_index]
-                print(Fore.YELLOW + f"| {dictionary_name.capitalize()} | Word: '{word}' | M: {magnitude} | D: {direction} |" + Fore.RESET)
-            
+                #print(Fore.YELLOW + f"| {dictionary_name.capitalize()} | Word: '{word}' | M: {magnitude} | D: {direction} |" + Fore.RESET)
             
             vectors.append([magnitude, direction]) #[[Magnitude, Direction], [M1, D1]]
             angle = angle + theta #each dictionary has a different direction
@@ -264,8 +278,10 @@ def process(sentence):
             category = dict_direction.get(0)
         else:
             category = dict_direction.get(round(resultant_vector[1]/theta) * 45)
-        print(Fore.GREEN + f"[TTA] Word: {word} | M:{resultant_vector[0]} D:{resultant_vector[1]} | Cat: {category}" + Fore.RESET + "\n")
 
+        #print(Fore.GREEN + f"[TTA] Word: {word} | M:{resultant_vector[0]} D:{resultant_vector[1]} | Cat: {category}" + Fore.RESET + "\n")
+
+        #Remove word if found in many dictionaries
         times_repeated = 0
         for vector in vectors:
             if vector[0] != 0:
@@ -273,8 +289,10 @@ def process(sentence):
         
         if times_repeated <= repeat_allowance:
             sentence_vectors.append(resultant_vector)
+            keywords[word] = resultant_vector
         else: 
-            print(Fore.RED + f"[TTA] Disregarding '{word}' (Too Common!)" + Fore.RESET)
+            #print(Fore.RED + f"[TTA] Disregarding '{word}' (Too Common!)" + Fore.RESET)
+            pass
         
     #Filtration
     #print(Fore.LIGHTGREEN_EX + f"[TTA] Begin Filtration")
@@ -286,12 +304,11 @@ def process(sentence):
     sentence_vectors = list(temp_vectors)
 
     #Vector Calculation for Sentence 
-    print(Fore.LIGHTCYAN_EX + f"[TTA] Calculating Vector for '{sentence}'" + Fore.RESET)
+    #print(Fore.LIGHTCYAN_EX + f"[TTA] Calculating Vector for '{sentence}'" + Fore.RESET)
     resultant_vector = addVectorList(sentence_vectors)
     resultant_vector = [resultant_vector[0]/n_words, resultant_vector[1]]
     
-    print(Fore.GREEN + f"[TTA] Resultant Vector: {resultant_vector}" + Fore.RESET)
-
+    #print(Fore.GREEN + f"[TTA] Resultant Vector: {resultant_vector}" + Fore.RESET)
     #print(dict_direction)
     if (round(resultant_vector[1]/theta) * 45) == 360:
         category = dict_direction.get(0)
@@ -299,10 +316,136 @@ def process(sentence):
     else:
         category = dict_direction.get(round(resultant_vector[1]/theta) * 45)
     
-    print(Fore.GREEN + f"[TTA] Category: {category}" + Fore.RESET)
-    return category
+    print(Fore.GREEN + f"[TTA] Resultant Vector: {resultant_vector} | Category: {category}" + Fore.RESET)
+    return category, keywords
 
+def vectCalcZ(sentence, returnbool = True):   
+    req_bool = False #Default returns false
+    sentence.lower()
+    phrase = sentence.split()
+    sum = 0
+    word_count = 0
+    
+    with open(r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Text to Action\Data\request_data.pkl", "rb") as req_data:
+        req_dict = dict(pickle.load(req_data))
+        
+    with open(r"C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Text to Action\Data\conversational_data.pkl", "rb") as conv_data:
+        conv_dict = dict(pickle.load(conv_data))
+    
+    #Positive (Request Dict)
+    for word in phrase:
+        word_count += 1
+        if req_dict.get(word) != None:
+            sum += req_dict.get(word)
+    
+    #Negative (Conv Dict)
+    for word in phrase:
+        if conv_dict.get(word) != None:
+            sum = sum - conv_dict.get(word)
+
+    average = sum/word_count
+    #print(f"Sentence: {sentence} | Sum: {sum} | Average: {average}")
+    
+    if average > 0: #if it is a request
+        req_bool = True 
+        print(Fore.GREEN + f"[TTA] Request: {sentence} | Score: {average}" + Fore.RESET)
+    
+    elif average <= 0:
+        req_bool = False
+        print(Fore.WHITE + f"Neutral: {sentence} | Score: {average}" + Fore.RESET)
+    
+    if returnbool == True:
+        return req_bool #if req, return true, else False
+    
+    else: 
+        return average
+
+def identifyKeywords(keywords): #keywords should be a dictionary with definitions of words with their vector magnitudes & direction
+    neutral_terms = []
+    identifiers = []
+
+    n_iteration = 0
+    index_of_last_neutral = 0
+    for keyword in keywords:
+        n_iteration += 1
+        if keywords[keyword][0] == 0: #if it does not have a magnitude
+            if n_iteration-index_of_last_neutral == 1 and index_of_last_neutral!=0: #if the previous word is also neutral (no magnitude)
+                combined = neutral_terms[-1] + " " + keyword #last word
+                neutral_terms.pop()
+                neutral_terms.append(combined)
+                index_of_last_neutral = n_iteration
+            
+            else:
+                neutral_terms.append(keyword)
+                index_of_last_neutral = n_iteration
+                
+        else: #if it is a keyword!
+            identifiers.append(keyword)
+            
+    return identifiers, neutral_terms
+            
+def process(sentence):
+    sentence = sentence.lower()
+    if vectCalcZ(sentence): #if it is a request
+        category, keywords = vectCalcXY(sentence)
+        identifiers, neutral_terms = identifyKeywords(keywords)
+        print(identifiers) # 
+        print(neutral_terms)
+        
+        if category == "google":
+            print(Fore.GREEN + f"[TTA] Google: {sentence}" + Fore.RESET)
+            results = search("Google", region="us")
+            for j in results:
+                print(j)
+        
+        elif category == "room":
+            print(Fore.GREEN + f"[TTA] Room: {sentence}" + Fore.RESET)
+        
+        elif category == "music":
+            print(Fore.GREEN + f"[TTA] Music: {sentence}" + Fore.RESET)
+            for identifier in identifiers:
+                if identifier == ("turn" or "play" or "pause"): #toggle
+                    if identifier == "play" or (identifier == "turn" and sentence.find("on") > -1):
+                        #check neutral_terms
+                        if len(neutral_terms) > 0: #if there are some neutral words
+                            x = 0
+                            longest_term = ""
+                            for term in neutral_terms:
+                                if len(term.split()) > x:
+                                    x = len(term.split())
+                                    longest_term = term
+                            
+                            spotify.play(song=longest_term)
+                            break
+                            
+                        else:       
+                            spotify.play()
+                            break
+                            
+                    elif identifier == "pause" or (identifier == "turn" and sentence.find("off") > -1):
+                        spotify.pause()
+                        break                     
+
+        elif category == "alarm":            
+            print(Fore.GREEN + f"[TTA] Alarm: {sentence}" + Fore.RESET)
+        
+        elif category == "timer":
+            print(Fore.GREEN + f"[TTA] Timer: {sentence}" + Fore.RESET)
+
+        elif category == "calendar":
+            print(Fore.GREEN + f"[TTA] Calendar: {sentence}" + Fore.RESET)
+        
+        elif category == "log":
+            print(Fore.GREEN + f"[TTA] Log: {sentence}" + Fore.RESET)
+
+        elif category == "command":
+            print(Fore.GREEN + f"[TTA] Command: {sentence}" + Fore.RESET)
+
+        else: 
+            print(Fore.RED + f"[TTA] Error! Category out of range: {category}")
+        
 train()
+
 while True:
     command = input("User: ")
     process(command)

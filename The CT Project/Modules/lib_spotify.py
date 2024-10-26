@@ -181,9 +181,8 @@ def play(song = None, song_artist = None, uridata=None):
     elif (song != None):
         sp.start_playback(uris=uri)
         print("Spotify Playback Started...")
-        print(currentlyPlaying())
         sleep(1)
-    
+        print(currentlyPlaying())
     else:
         try:
             sp.start_playback()
@@ -192,7 +191,7 @@ def play(song = None, song_artist = None, uridata=None):
             print(currentlyPlaying())
             
         except spotipy.exceptions.SpotifyException:
-            print("Spotify Broke... ")
+            print("Spotify is already playing!")
 
 def switchDevice(device_name, force_play=True):
     device_id = []

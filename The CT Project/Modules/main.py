@@ -9,7 +9,8 @@ import serial #custom serial library is not needed (see class: serial)
 import pygame
 import pvporcupine
 import threading as th
-import lib_tta_2D as action
+import lib_tta_3D as action
+from colorama import Fore
 import lib_spotify as spotify
 from pvrecorder import PvRecorder
 from lib_stt import recognizer as SST
@@ -31,6 +32,9 @@ truecentre = WIDTH/2
 movement_pix_sens = 64
 detector = dlib.get_frontal_face_detector()
 serial_comm_limit = 0.2
+
+#Reminder
+REMINDERSPATH = r'C:\Users\delay\OneDrive\Documents\Code & Programs\Visual Studio Code\Python\The CT Project\Modules\Reminder\data.txt'
 
 #Serial
 class Serial:
@@ -174,25 +178,147 @@ def listen():
 
 def textToAction():
     global speech
+    global state
     
-    if speech != None:
-        if action.process(speech) == True: #it is a request
-            if speech.find("phone") != -1:
-                Serial.write("05/eject")
+    if speech != None and len(speech) > 1:
+        category, sentence, identifiers, neutral_terms = action.process(speech)
+        #if it is a request, category != None
+        
+        if category == "reminder":
+            print(Fore.GREEN + f"[TTA] Reminder: {sentence}" + Fore.RESET)
+            for identifier in identifiers:
+                if identifier == "what" or identifier == "view":
+                    with open(REMINDERSPATH, "r") as rfile:
+                        reminders = rfile.readlines()
+                        if reminders[0] != None:
+                            n_reminders = 0
+                            print(Fore.GREEN + "Reminders: " + Fore.RESET)
+                            for reminder in reminders:
+                                n_reminders += 1
+                                print(f"{n_reminders}: {reminder}")
+                    
+                    rfile.close()
                 
-            #Request processing
-            pass
+                elif identifier == "add" or identifier == "remind":
+                    with open(REMINDERSPATH, "a") as rfile:
+                        print(Fore.GREEN + f"New Reminder Added: {' '.join(neutral_terms)}" + Fore.RESET)
+                        rfile.write((" ".join(neutral_terms) + "\n"))
+                    
+                    rfile.close()
+                
+                elif identifier == "delete" or identifier == "complete" or identifier == "mark" or identifier == "remove": #not working yet
+                    reminders_dictionary = {}
+                    with open(REMINDERSPATH, "w+") as rfile:
+                        reminders = rfile.readlines()
+                        if reminders[0] != None:
+                            n_reminders = 0
+                            print(Fore.GREEN + "Reminders: " + Fore.RESET)
+                            for reminder in reminders:
+                                n_reminders += 1
+                                reminders_dictionary[n_reminders] = reminder
+                    
+                    rfile.close()
         
-        else: 
-            pass #if it is conversation do something else 
-    
-    # if speech != None:
-    #     #print(f"[PYSST] {speech}")
-    #     if speech.find("play") >= 0:
-    #         spotify.play()
+        elif category == "room":
+            print(Fore.GREEN + f"[TTA] Room: {sentence}" + Fore.RESET)
         
-    #     elif speech.find("pause") >= 0:
-    #         spotify.pause()
+        elif category == "music":
+            print(Fore.GREEN + f"[TTA] Music: {sentence}" + Fore.RESET)
+            for identifier in identifiers:
+                if identifier == "turn" or identifier == "play" or identifier == "pause": #toggle
+                    if identifier == "play" or (identifier == "turn" and sentence.find("on") > -1):
+                        #check neutral_terms
+                        if len(neutral_terms) > 0: #if there are some neutral words
+                            x = 0
+                            song_name = ""
+                            
+                            for term in neutral_terms:
+                                if len(term.split()) > x:
+                                    x = len(term.split())
+                                    song_name = term
+                            try: 
+                                index = neutral_terms.index("by") + 1
+                                spotify.play(song=song_name, song_artist=neutral_terms[index])
+                                
+                            except ValueError:
+                                spotify.play(song=song_name)
+                            
+                        else:       
+                            spotify.play()
+                            break
+                            
+                    elif identifier == "pause" or (identifier == "turn" and sentence.find("off") > -1):
+                        spotify.pause()
+                        break             
+                    
+                elif identifier == "skip":
+                    spotify.skip()
+                    break       
+                    
+                elif identifier == "rewind":
+                    spotify.rewind()
+                    break       
+                
+                elif identifier == "add" or "queue":
+                    if len(neutral_terms) > 0: #if there are some neutral words
+                        x = 0
+                        song_name = ""
+                        
+                        for term in neutral_terms:
+                            if len(term.split()) > x:
+                                x = len(term.split())
+                                song_name = term
+                        
+                        try: 
+                            index = neutral_terms.index("by") + 1
+                            spotify.addtoQueue(song=song_name, song_artist=neutral_terms[index])
+                            
+                        except ValueError:
+                            spotify.addtoQueue(song=song_name)
+                
+                else:
+                    print(spotify.currentlyPlaying())
+                    break
+                        
+        elif category == "alarm":            
+            print(Fore.GREEN + f"[TTA] Alarm: {sentence}" + Fore.RESET)
+        
+        elif category == "timer":
+            print(Fore.GREEN + f"[TTA] Timer: {sentence}" + Fore.RESET)
+
+        elif category == "calendar":
+            print(Fore.GREEN + f"[TTA] Calendar: {sentence}" + Fore.RESET)
+        
+        elif category == "log":
+            print(Fore.GREEN + f"[TTA] Log: {sentence}" + Fore.RESET)
+
+        elif category == "command":
+            print(Fore.GREEN + f"[TTA] Command: {sentence}" + Fore.RESET)
+            for identifier in identifiers:
+                if identifier == "eject" or identifier == "phone":
+                    Serial.write("05/eject")
+                    break
+                    
+                elif identifier == "sleep":
+                    state = "sleep"
+                    Serial.write("03/sw/98/10")
+                    Serial.write("00/sleep")
+                    break
+                    
+                elif identifier == "hibernate" or identifier == "hibernation":
+                    state = "deepsleep"
+                    Serial.write("00/deepsleep")
+                    break
+        
+        else: #so far, it is deactivated 
+            print(Fore.RED + f"[TTA] Error! NoneType Category (Not a request)" + Fore.RESET)
+            if sentence.find("sleep") != -1:
+                state="sleep"
+                Serial.write("03/sw/98/10")
+                Serial.write("00/sleep")
+                
+            elif sentence.find("hibernate") != -1:
+                state="deepsleep"
         
         speech = None #reset speech to None
 
@@ -306,22 +432,20 @@ def main():
 
                         prev_face_x = face_x
                         
-            cv2.imshow('frame', frame)
+            #cv2.imshow('frame', frame)
             key = cv2.waitKey(1) & 0xFF
 
             if key == ord("q") or key == ord("Q"):
-                print("Quitting...")
-                vid.release() 
-                cv2.destroyAllWindows() 
-                time.sleep(0.5)
-                state = "sleep"
-                Serial.write("03/sw/98/10")
-                Serial.write("00/sleep")
                 break  
             
             face_x = 0
             face_y = 0
     
+        print("Quitting...")
+        vid.release() 
+        cv2.destroyAllWindows() 
+        time.sleep(0.5)
+        
     elif state == "sleep":
         #print("SLEEP")
         sleep()
